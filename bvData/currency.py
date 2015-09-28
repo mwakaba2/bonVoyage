@@ -7,7 +7,7 @@ import json
 # Input format:
 # [{name: "name of the city", country: "country of that city"}, ...]
 
-# Output: corresponding currencies.json file
+# Output: corresponding currency.json file
 # Output format:
 # ["currency name", ...]
 
@@ -39,5 +39,5 @@ def currency(_country):
     return _currency
 
 currencies = map(currency, countries)
-with open('currencies.json', 'w') as currencies_file:
+with open('currency.json', 'w') as currencies_file:
     json.dump(currencies, currencies_file)

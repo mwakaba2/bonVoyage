@@ -7,7 +7,7 @@ import json
 # Input format:
 # [{name: "name of the city", country: "country of that city"}, ...]
 
-# Output: corresponding languages.json file
+# Output: corresponding language.json file
 # Output format:
 # ["language name", ...]
 
@@ -40,5 +40,5 @@ def language(_country):
     return _language
 
 languages = map(language, countries)
-with open('languages.json', 'w') as languages_file:
+with open('language.json', 'w') as languages_file:
     json.dump(languages, languages_file)

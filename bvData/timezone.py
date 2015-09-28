@@ -7,7 +7,7 @@ import json
 # Input format:
 # [{name: "name of the city", country: "country of that city"}, ...]
 
-# Output: corresponding timezones.json file
+# Output: corresponding timezone.json file
 # Output format:
 # ["timezone name", ...]
 
@@ -39,5 +39,5 @@ def timezone(_name):
     return _timezone
 
 timezones = map(timezone, names)
-with open('timezones.json', 'w') as timezones_file:
+with open('timezone.json', 'w') as timezones_file:
     json.dump(timezones, timezones_file)

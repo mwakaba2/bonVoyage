@@ -1,0 +1,1 @@
+attributes = ["currency", "description", "image", "language", "timezone"]
