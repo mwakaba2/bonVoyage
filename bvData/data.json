@@ -1,0 +1,452 @@
+[
+  {
+    "description": "How could we not include Venice? From its picturesque canals and grandiose basilicas to its colorful homes and cozy wine bars, there's simply nowhere like it on Earth.(Photo by Jesus Lopez)",
+    "language": "Italian",
+    "country": "Italy",
+    "image": "http:\/\/images.huffingtonpost.com\/2014-07-03-VeniceJesusLopez-thumb.jpg",
+    "currency": "EUR",
+    "timezone": "CET",
+    "name": "Venice"
+  },
+  {
+    "description": "Seville is the crown-jewel of imperial Spain and visitors can delight at the city's narrow streets lined with orange blossoms, Moorish castles, and some of Spain's most legendary tapas joints. (Photo by Zu Sanchez)",
+    "language": "Spanish",
+    "country": "Spain",
+    "image": "http:\/\/images.huffingtonpost.com\/2014-07-03-SevilleZuSanchez-thumb.jpg",
+    "currency": "EUR",
+    "timezone": "CET",
+    "name": "Seville"
+  },
+  {
+    "description": "It's no wonder New York is often called the \"Crossroads of the World.\" Nowhere else can you find such a mind-blowing concentration of art, culture, cuisine, and business. (Photo by Iker F. Gavilan)",
+    "language": "English",
+    "country": "USA",
+    "image": "http:\/\/images.huffingtonpost.com\/2014-07-03-NewYorkIkerFernandezGavilan-thumb.jpg",
+    "currency": "USD",
+    "timezone": "EST",
+    "name": "New York City"
+  },
+  {
+    "description": "Lhasa is the spiritual center of Tibetan Buddhism and the rugged Himalayas set against Lhasa's incense-filled monasteries and palaces make for one of the most unforgettable views on Earth. (Photo by Juanjo Fontanet)",
+    "language": "Chinese",
+    "country": "China",
+    "image": "http:\/\/images.huffingtonpost.com\/2014-07-03-LhasaJuanjoFontanet-thumb.jpg",
+    "currency": "CNY",
+    "timezone": "China Standard Time",
+    "name": "Lhasa"
+  },
+  {
+    "description": "From the world-famous Carnival to its iconic skyline, Rio de Janeiro is an experience for all five senses. The fact that its home to two of the most famous beaches on Earth doesn't hurt either! (Photo by Stocklapse)",
+    "language": "Portuguese",
+    "country": "Brazil",
+    "image": "http:\/\/images.huffingtonpost.com\/2014-07-03-RiodeJaneiroStocklapse-thumb.jpg",
+    "currency": "BRL",
+    "timezone": "BRT",
+    "name": "Rio de Janeiro"
+  },
+  {
+    "description": "With its prestigious museums, famous street markets, and bustling financial center, it's no wonder that London is one of the world's most-visited cities. What are you waiting for? London's calling! (Photo by Tbtb)",
+    "language": "English",
+    "country": "England",
+    "image": "http:\/\/images.huffingtonpost.com\/2014-07-03-LondonTbtb-thumb.jpg",
+    "currency": "GBP",
+    "timezone": "GMT",
+    "name": "London"
+  },
+  {
+    "description": "Entering the medina of Marrakech is an experience you'll never forget: endless, maze-like corridors full of vibrant souks, stunning architecture, and bubbling tagines around every corner. (Photo by Cesar Blay)",
+    "language": "Arabic",
+    "country": "Morocco",
+    "image": "http:\/\/images.huffingtonpost.com\/2014-07-03-MarrakechCesarBlay-thumb.jpg",
+    "currency": "MAD",
+    "timezone": "WET",
+    "name": "Marrakech"
+  },
+  {
+    "description": "Of all the world's great ancient cities, Petra stands in a league of its own. Set in the midst of a epic, wind-swept desert, Petra's monumental rock-cut buildings must be seen to be believed. (Photo by Husar 77)",
+    "language": "Arabic",
+    "country": "Jordan",
+    "image": "http:\/\/images.huffingtonpost.com\/2014-07-03-PetraHusar77-thumb.jpg",
+    "currency": "JOD",
+    "timezone": "AST",
+    "name": "Petra"
+  },
+  {
+    "description": "Walking through Rome is like exploring the world's largest open-air museum. Simply put, no city on Earth combines fine art, cuisine, tons and tons of ancient history quite like the Eternal City. (Photo by Tbtb)",
+    "language": "Italian",
+    "country": "Italy",
+    "image": "http:\/\/images.huffingtonpost.com\/2014-07-03-RomeTbtb-thumb.jpg",
+    "currency": "EUR",
+    "timezone": "CET",
+    "name": "Rome"
+  },
+  {
+    "description": "Varanasi, one of India's holiest cities, is a true experience for the senses. Seeing the sunrise as the ghats on banks the Ganges fill up with holy men, pilgrims, and locals is a sight you'll never forget. (Photo by Jordi Batet)",
+    "language": "Hindi",
+    "country": "India",
+    "image": "http:\/\/images.huffingtonpost.com\/2014-07-03-VaranasiJordiBatet-thumb.jpg",
+    "currency": "INR",
+    "timezone": "IST",
+    "name": "Varanasi"
+  },
+  {
+    "description": "As home of the Renaissance, Florence boasts one of the most incredible art collections on Earth, to say nothing of the gorgeous cathedrals, delicious Tuscan food, and rich, enchanting architecture. (Photo by Ivan Luengo)",
+    "language": "Italian",
+    "country": "Italy",
+    "image": "http:\/\/images.huffingtonpost.com\/2014-07-03-FlorenceIvanLuengo-thumb.jpg",
+    "currency": "EUR",
+    "timezone": "CET",
+    "name": "Florence"
+  },
+  {
+    "description": "Exploring the streets of Old Havana is like stepping back in time to a world of majestic pre-revolutionary buildings, classic cars, and the smell of home-cooking mixing with the sea breeze. (Photo by Viajesyfotografia)",
+    "language": "Spanish",
+    "country": "Cuba",
+    "image": "http:\/\/images.huffingtonpost.com\/2014-07-03-HavanaViajesyfotografia-thumb.jpg",
+    "currency": "CUP",
+    "timezone": "UTC",
+    "name": "Havana"
+  },
+  {
+    "description": "Kyoto was once the Imperial Capital of Japan and exploring its elegant tea-houses, gardens, and castles is the best way to discover the true essence of traditional Japan. (Photo by Viajesyfotografia)",
+    "language": "Japanese",
+    "country": "Japan",
+    "image": "http:\/\/images.huffingtonpost.com\/2014-07-03-KyotoViajesyfotografia-thumb.jpg",
+    "currency": "JPY",
+    "timezone": "JST",
+    "name": "Kyoto"
+  },
+  {
+    "description": "Jerusalem is a true crossroads of cultures, cuisines, and beliefs. Nowhere is this more evident than in the streets of the Old City, home to some of history's greatest persons and events. (Photo by Ignacio Izquierdo)",
+    "language": "Hebrew",
+    "country": "Israel",
+    "image": "http:\/\/images.huffingtonpost.com\/2014-07-03-JerusalemIgnacioIzquierdo-thumb.jpg",
+    "currency": "ILS",
+    "timezone": "UTC+2",
+    "name": "Jerusalem"
+  },
+  {
+    "description": "The City of Lights is the place to immerse yourself in breathtaking museums, enchanting squares, and tons of cafes. It's no wonder why it's considered to be the most romantic place on Earth! (Photo by Juan Z. Aranda)",
+    "language": "French",
+    "country": "France",
+    "image": "http:\/\/images.huffingtonpost.com\/2014-07-03-ParisJuanZ.Aranda-thumb.jpg",
+    "currency": "EUR",
+    "timezone": "CET",
+    "name": "Paris"
+  },
+  {
+    "description": "Beijing is China's historical and cultural capital and home to two of the most awe-inspiring places on Earth: the monumental Forbidden City and the Great Wall of China in the nearby mountains.(Photo by David Esteban)",
+    "language": "Chinese",
+    "country": "China",
+    "image": "http:\/\/images.huffingtonpost.com\/2014-07-03-BeijingDavidEsteban-thumb.jpg",
+    "currency": "CNY",
+    "timezone": "China Standard Time",
+    "name": "Beijing"
+  },
+  {
+    "description": "Lalibela is one of Ethiopia's great holy cities and is famous around the world for its unique and stunning collection of monolithic churches carved right into the rock below your feet. (Photo by Alfonso N. Tappero)",
+    "language": "Amharic",
+    "country": "Ethiopia",
+    "image": "http:\/\/images.huffingtonpost.com\/2014-07-03-LalibelaAlfonsoNavarroTppero-thumb.jpg",
+    "currency": "ETB",
+    "timezone": "EAT",
+    "name": "Lalibela"
+  },
+  {
+    "description": "From the glories of the Alhambra to the narrow, cobblestone streets of the Albayz\u00edn district, Granada has an undeniable magic that's rarely found even in the great cities of Europe. (Photo by Miguel Eguido)",
+    "language": "Spanish",
+    "country": "Spain",
+    "image": "http:\/\/images.huffingtonpost.com\/2014-07-03-AlhambraMiguelEgido-thumb.jpg",
+    "currency": "EUR",
+    "timezone": "CET",
+    "name": "Granada"
+  },
+  {
+    "description": "The Acropolis has a top spot on many bucket lists, but the city's sunny streets, flower-lined squares, and incredible museums makes Athens much more than just ancient ruins. (Photo by Gianfranco Perlongo)",
+    "language": "Greek",
+    "country": "Greece",
+    "image": "http:\/\/images.huffingtonpost.com\/2014-07-03-AthensGreuf-thumb.jpg",
+    "currency": "EUR",
+    "timezone": "EET",
+    "name": "Athens"
+  },
+  {
+    "description": "Could the world's best sunrise be in the ancient city of Bagan? Many would say so. Just imagine: the mist evaporating in the day's first light, revealing a near-endless plain of ancient pagodas. (Photo by Gorka Nelson)",
+    "language": "Burmese",
+    "country": "Myanmar",
+    "image": "http:\/\/images.huffingtonpost.com\/2014-07-03-BaganGorkaNelsonArtano-thumb.jpg",
+    "currency": "MMK",
+    "timezone": "MST",
+    "name": "Bagan"
+  },
+  {
+    "description": "Kathmandu is, for many, the gateway to the majestic Himalayas. With its mixture of sadhus, saffron-robed monks, and iconic prayer flags, it' also one of the most colorful cities on Earth. (Photo by Nic Dalla-Valle)",
+    "language": "Nepali",
+    "country": "Nepal",
+    "image": "http:\/\/images.huffingtonpost.com\/2014-07-03-KathmanduNicDallaValle-thumb.jpg",
+    "currency": "NPR",
+    "timezone": "Nepal Standard Time",
+    "name": "Kathmandu"
+  },
+  {
+    "description": "The Vatican is a city within a city and home to the Roman Catholic Church. Even if you're just a sightseer, the columns and cupola of St. Peter's Square are enough to take your breath away. (Photo by Pablo L. Ramos)",
+    "language": "Italian",
+    "country": "Vantican City",
+    "image": "http:\/\/images.huffingtonpost.com\/2014-07-03-VaticanPabloLpezRamos-thumb.jpg",
+    "currency": "EUR",
+    "timezone": "CET",
+    "name": "Vatican City"
+  },
+  {
+    "description": "Lisbon truly has it all: sun, sea, and an enchanting and decadent atmosphere like that found amid the sunny, colorful streets of the city's Chiado and Alfama neighborhoods. (Photo by Jessica M. Infante)",
+    "language": "Portuguese",
+    "country": "Portugal",
+    "image": "http:\/\/images.huffingtonpost.com\/2014-07-03-LisbonJessicaMartinezInfante-thumb.jpg",
+    "currency": "EUR",
+    "timezone": "WET",
+    "name": "Lisbon"
+  },
+  {
+    "description": "Tokyo seems straight from the future. While this glittering metropolis of 13 million is a Mecca for shopping, foodies, and partiers, it is still home to some truly peaceful shrines and gardens. (Photo by Sandra G. Arangoa)",
+    "language": "Japanese",
+    "country": "Japan",
+    "image": "http:\/\/images.huffingtonpost.com\/2014-07-03-TokyoSandraGarciaArangoa-thumb.jpg",
+    "currency": "JPY",
+    "timezone": "JST",
+    "name": "Tokyo"
+  },
+  {
+    "description": "Yes, Istanbul...the city where east meets west. From its monumental mosques to its bustling bazaars, Istanbul is city that can boast millenia of history and still be more relevant than ever. (Photo by Mikel H)",
+    "language": "Turkish",
+    "country": "Turkey",
+    "image": "http:\/\/images.huffingtonpost.com\/2014-07-03-IstanbulMikelH-thumb.jpg",
+    "currency": "TRY",
+    "timezone": "EET",
+    "name": "Istanbul"
+  },
+  {
+    "description": "Hoi An is a historic Vietnamese port whose UNESCO-recognized Old City is a unique mix of Japanese, Vietnamese, and European influences. Oh, and just wait until you try the food. (Photo by Vincenzo Tessarin)",
+    "language": "Vietnamese",
+    "country": "Vietnam",
+    "image": "http:\/\/images.huffingtonpost.com\/2014-07-03-HoiAnVincenzoTessarin-thumb.jpg",
+    "currency": "VND",
+    "timezone": "ICT",
+    "name": "Hoi An"
+  },
+  {
+    "description": "Amsterdam has one of the world's highest qualities of life, a fact not lost on the millions of visitors charmed by its famous Red Light District and stunning Van Gogh Museum. (Photo by Zu Sanchez)",
+    "language": "Dutch",
+    "country": "Netherlands",
+    "image": "http:\/\/images.huffingtonpost.com\/2014-07-03-AmsterdamJessSnchezIbez-thumb.jpg",
+    "currency": "EUR",
+    "timezone": "CET",
+    "name": "Amsterdam"
+  },
+  {
+    "description": "Set on the banks of the Nile, Luxor is the most stunning of Egypt's ancient cities. Its proximity to Karnak, Thebes, and the Valley of the Kings makes it a must for history-lovers worldwide. (Photo by Pablo Charlon)",
+    "language": "Arabic",
+    "country": "Egypt",
+    "image": "http:\/\/images.huffingtonpost.com\/2014-07-03-LuxorPabloCharln-thumb.jpg",
+    "currency": "EGP",
+    "timezone": "EET",
+    "name": "Luxor"
+  },
+  {
+    "description": "Few cities have played such a pivotal role in recent history as Berlin and its legendary nightlife and vibrant restaurant scene also make it one of the most exciting cities in modern Europe. (Photo by Jose P. Rodriguez)",
+    "language": "German",
+    "country": "Germany",
+    "image": "http:\/\/images.huffingtonpost.com\/2014-07-03-BerlinJosPeafielRodrguez-thumb.jpg",
+    "currency": "EUR",
+    "timezone": "CET",
+    "name": "Berlin"
+  },
+  {
+    "description": "Jaipur, capital of Rajasthan, is home to some of the India's most spectacular palaces and gardens. It's also part of India's famous \"Golden Triangle\" featuring the Taj Mahal in Agra and New Delhi. (Photo by Jordi Batet)",
+    "language": "Hindi",
+    "country": "India",
+    "image": "http:\/\/images.huffingtonpost.com\/2014-07-03-JaipurJordiBatet-thumb.jpg",
+    "currency": "INR",
+    "timezone": "IST",
+    "name": "Jaipur"
+  },
+  {
+    "description": "Lyon is a World Heritage city dating back to Roman times. Try visiting during the F\u00eate des Lumi\u00e8res when the cathedrals, gardens, and streets are illuminated by thousands of lights. (Photo by Christian Belzunce)",
+    "language": "French",
+    "country": "France",
+    "image": "http:\/\/images.huffingtonpost.com\/2014-07-03-LyonChristianBelzunce-thumb.jpg",
+    "currency": "EUR",
+    "timezone": "CET",
+    "name": "Lyon"
+  },
+  {
+    "description": "Oia is the most famous town on the Greek island of Santorini and its gorgeous white and blue homes cascading down to the sea are the stuff that postcards are made of! (Photo by Gianfranco Perlongo)",
+    "language": "Greek",
+    "country": "Greece",
+    "image": "http:\/\/images.huffingtonpost.com\/2014-07-03-OiaGianfrancoPerlongo-thumb.jpg",
+    "currency": "EUR",
+    "timezone": "EET",
+    "name": "Oia"
+  },
+  {
+    "description": "While most come to see the stunning ancient city of Angkor Wat, but Siem Reap's laid-back bohemian-backpacker vibe and tasty food make it a worthy destination on its own. (Photo by Angel B. Arevalo)",
+    "language": "Khmer",
+    "country": "Cambodia",
+    "image": "http:\/\/images.huffingtonpost.com\/2014-07-03-SiemReapAngelBalmonArevalo-thumb.jpg",
+    "currency": "KHR",
+    "timezone": "UTC+7",
+    "name": "Siem Reap"
+  },
+  {
+    "description": "Vienna is a majestic Imperial city full of beautiful palaces, manicured gardens, and elegant cafes. The fact that it's consistently voted as one of the world's most livable cities is just the icing on the cake. (Photo by Machbel)",
+    "language": "German",
+    "country": "Austria",
+    "image": "http:\/\/images.huffingtonpost.com\/2014-07-03-ViennaMachbel-thumb.jpg",
+    "currency": "EUR",
+    "timezone": "CET",
+    "name": "Vienna"
+  },
+  {
+    "description": "Besides being the main entry point for those looking to explore the Andes and Machu Picchu, the World Heritage city of Cusco is full of historic temples, monasteries, and gorgeous colonial homes. (Photo by Chris Pearrow)",
+    "language": "Spanish",
+    "country": "Peru",
+    "image": "http:\/\/images.huffingtonpost.com\/2014-07-03-CuscoChrisPearrow-thumb.jpg",
+    "currency": "PEN",
+    "timezone": "PET",
+    "name": "Cusco"
+  },
+  {
+    "description": "The colonial city of Cartagena on Colombia's Caribbean coast has a history filled with explorers, pirates, and royalty, and it's UNESCO-recognized Old City is every bit as enchanting as you'd expect.",
+    "language": "Spanish",
+    "country": "Colombia",
+    "image": "http:\/\/images.huffingtonpost.com\/2014-07-03-Cartagena-thumb.jpg",
+    "currency": "COP",
+    "timezone": "COT",
+    "name": "Cartagena"
+  },
+  {
+    "description": "The ancient city of Zanzibar is one of Africa's top destinations and famous for its white-sand beaches and mix African, Arab, and Portuguese influences in the historic district of Stone Town. (Photo by Naxos)",
+    "language": "Swahili",
+    "country": "Tanzania",
+    "image": "http:\/\/images.huffingtonpost.com\/2014-07-03-ZanzibarNaxos-thumb.jpg",
+    "currency": "TZS",
+    "timezone": "EAT",
+    "name": "Zanzibar"
+  },
+  {
+    "description": "Mexico City is a delightful chaos of sights, sounds, and colors. Home to over 20 million people, the city offers beautiful colonial architecture, nearby ruins, and some seriously good food. (Photo by Azu Azul)",
+    "language": "Spanish",
+    "country": "Mexico",
+    "image": "http:\/\/images.huffingtonpost.com\/2014-07-03-MexicoCityAzuAzul-thumb.jpg",
+    "currency": "MXN",
+    "timezone": "CST",
+    "name": "Mexico City"
+  },
+  {
+    "description": "Whether on vacation or during a layover, Singapore is a place that needs to be experienced. Exploring Little India is a must, but remember to save time for arguably the best street food in the entire world. (Photo by Dirk Vietzke)",
+    "language": "English",
+    "country": "Singapore",
+    "image": "http:\/\/images.huffingtonpost.com\/2014-07-03-SingaporeDirkVietzke-thumb.jpg",
+    "currency": "SGD",
+    "timezone": "SST",
+    "name": "Singapore"
+  },
+  {
+    "description": "Sin City is a favorite among national and international visitors drawn by the city's incomparable mix of fine hotels, famous restaurants, and over-the-top casinos. Viva Las Vegas! (Photo by Surapon Sujjavanich)",
+    "language": "English",
+    "country": "USA",
+    "image": "http:\/\/images.huffingtonpost.com\/2014-07-03-LasVegasSuraponSujjavanich-thumb.jpg",
+    "currency": "USD",
+    "timezone": "PST",
+    "name": "Las Vegas"
+  },
+  {
+    "description": "Samarkand is an ancient Silk Road city and the madrasas and mosaics of the monumental Registan square are among the world's most beautiful examples of Islamic architecture. (Photo by Sonia R. Salces)",
+    "language": "Uzbek",
+    "country": "Uzbekistan",
+    "image": "http:\/\/images.huffingtonpost.com\/2014-07-03-Samarkand249experiences27plansSoniaRequejoSalces-thumb.jpg",
+    "currency": "UZS",
+    "timezone": "UTC+5",
+    "name": "Samarkand"
+  },
+  {
+    "description": "From its iconic Opera House to its famous beaches, Sydney knows how to perfectly combine the natural and the urban and leaves no doubt about its place among the greatest cities on Earth. (Photo by Naxos)",
+    "language": "English",
+    "country": "Australia",
+    "image": "http:\/\/images.huffingtonpost.com\/2014-07-03-SydneyNaxos-thumb.jpg",
+    "currency": "AUD",
+    "timezone": "AEST",
+    "name": "Sydney"
+  },
+  {
+    "description": "You didn't think we'd forget San Francisco, did you? It's historic buildings, nearby natural parks, and acclaimed cuisine make it the undoubted star of the American west coast. (Photo by Monica Lewis)",
+    "language": "English",
+    "country": "USA",
+    "image": "http:\/\/images.huffingtonpost.com\/2014-07-03-SanFranciscoMonicaLewis-thumb.jpg",
+    "currency": "USD",
+    "timezone": "PST",
+    "name": "San Francisco"
+  },
+  {
+    "description": "As over 3 million annual visitors can attest, there are few sights quite as evocative or romantic as the spire of Mont Saint Michel Abbey rising above the tranquil Normandy coast. (Photo by Michel Exaim)",
+    "language": "French",
+    "country": "France",
+    "image": "http:\/\/images.huffingtonpost.com\/2014-07-03-MontSaintMichelExaim-thumb.jpg",
+    "currency": "EUR",
+    "timezone": "CET",
+    "name": "Mont Saint Michel"
+  },
+  {
+    "description": "The walled city of Dubrovnik is the jewel of the Adriatic and it's Old City (a World Heritage Site) is one of the most picturesque areas in all of Europe. Don't get us started on the beaches! (Photo by Serviajera)",
+    "language": "Croatian",
+    "country": "Croatia",
+    "image": "http:\/\/images.huffingtonpost.com\/2014-07-03-DubrovnikServiajera-thumb.jpg",
+    "currency": "HRK",
+    "timezone": "CET",
+    "name": "Dubrovnik"
+  },
+  {
+    "description": "From peaceful temples to exotic markets and rowdy nightclubs, Bangkok has something for everyone. It has become so popular, in fact, that it beat London as 2013's most-visited city! (Photo by Alberto S. Dosantos)",
+    "language": "Thai",
+    "country": "Thailand",
+    "image": "http:\/\/images.huffingtonpost.com\/2014-07-03-BangkokAlbertoSuarezDosantos-thumb.jpg",
+    "currency": "THB",
+    "timezone": "ICT",
+    "name": "Bangkok"
+  },
+  {
+    "description": "Buenos Aires is often called the Paris of South America. From the wide avenues of downtown to the colorful homes and tango clubs of Barrio La Boca, Buenos Aires is a place to savor. (Photo by Flavia Ramos)",
+    "language": "Spanish",
+    "country": "Argentina",
+    "image": "http:\/\/images.huffingtonpost.com\/2014-07-03-BuenosAiresFlaviaRamos-thumb.jpg",
+    "currency": "ARS",
+    "timezone": "ART",
+    "name": "Buenos Aires"
+  },
+  {
+    "description": "There's one word to describe Antigua Guatemala: magical. Visitors can explore the ruins of colonial churches and monasteries and dive into a bohemian cafe, all under the gaze of the three watchful volcanoes that dominate the horizon. (Photo by Sonia R. Salces)",
+    "language": "Spanish",
+    "country": "Guatemala",
+    "image": "http:\/\/images.huffingtonpost.com\/2014-07-03-AntiguaGuatemalaSoniaRequejoSalces-thumb.jpg",
+    "currency": "GTQ",
+    "timezone": "CST",
+    "name": "Antigua Guatemala"
+  },
+  {
+    "description": "An mix of history, stunning architecture, and hearty cuisine has made Prague one of the world's most-visited cities and a must for travelers searching for the soul of central Europe.(Photo by Alvaro M. Molina)",
+    "language": "Czech",
+    "country": "Czech Republic",
+    "image": "http:\/\/images.huffingtonpost.com\/2014-07-03-PragueAlvaroMarcoMolina-thumb.jpg",
+    "currency": "CZK",
+    "timezone": "CET",
+    "name": "Prague"
+  },
+  {
+    "description": "The countless empires that have ruled Budapest over the years all left a trace on this city often considered to be the most beautiful in Europe. Add a rowdy nightlife scene and plenty of hot springs, and you've got a recipe for travel bliss. (Photo by Raquel Rey)",
+    "language": "Hungarian",
+    "country": "Hungary",
+    "image": "http:\/\/images.huffingtonpost.com\/2014-07-03-BudapestRaquelRey-thumb.jpg",
+    "currency": "HUF",
+    "timezone": "CET",
+    "name": "Budapest"
+  }
+]
