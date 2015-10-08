@@ -1,10 +1,8 @@
 var express = require('express');
 var router = express.Router();
 
-var monk = require('monk');
-var db = monk('localhost:27017/bonVoyage');
-
 router.get('/', function(req, res) {
+    var db = req.db;
     var collection = db.get('cities');
     collection.find({}, function(err,cities){
         if (err) throw err;
@@ -13,6 +11,7 @@ router.get('/', function(req, res) {
 });
 
 router.post('/', function(req, res){
+    var db = req.db;
     var collection = db.get('cities');
     collection.insert({
         name: req.body.name,
@@ -26,6 +25,7 @@ router.post('/', function(req, res){
 
 
 router.get('/:id', function(req, res) {
+    var db = req.db;
     var collection = db.get('cities');
     collection.findOne({ _id: req.params.id }, function(err, city){
         if (err) throw err;
@@ -35,6 +35,7 @@ router.get('/:id', function(req, res) {
 });
 
 router.put('/:id', function(req, res){
+    var db = req.db;
     var collection = db.get('cities');
     collection.update({
         _id: req.params.id
@@ -51,6 +52,7 @@ router.put('/:id', function(req, res){
 
 
 router.delete('/:id', function(req, res) {
+    var db = req.db;
     var collection = db.get('cities');
     collection.remove({ _id: req.params.id }, function(err, city){
         if (err) throw err;
