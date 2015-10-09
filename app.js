@@ -11,17 +11,18 @@ livereloadServer.watch([
     __dirname + "/routes",
     __dirname + "/views"
 ]);
-// Database
 var mongo = require('mongodb');
 var monk = require('monk');
 
-var routes = require('./routes/index');
-var cities = require('./routes/cities');
-
 var app = express();
 
+// database
 var db_url = app.get('env') === 'development' ? 'localhost:27017/bonVoyage' : process.env.MONGOLAB_URI;
 var db = monk(db_url);
+
+// routes
+var routes = require('./routes/index');
+var api_cities = require('./routes/api_cities');
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -41,7 +42,7 @@ app.use(function (req, res, next) {
 });
 
 app.use('/', routes);
-app.use('/api/cities', cities);
+app.use('/api/cities', api_cities);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
