@@ -1,28 +1,27 @@
-var app = angular.module('bonVoyage', ['ngResource','ngRoute']);
+var app = angular.module('bonVoyage', ['ngResource', 'ngRoute']);
 
-app.config(['$routeProvider', function($routeProvider){
+app.config(['$routeProvider', function ($routeProvider) {
     $routeProvider
         .when('/', {
             templateUrl: 'templates/home.html',
             controller: 'HomeCtrl'
         })
-        .when('/add-city', {
-            templateUrl: 'templates/city-form.html',
-            controller: 'AddCityCtrl'
+        .when('/cities', {
+            templateUrl: 'templates/cities.html',
+            controller: 'CitiesCtrl'
         })
         .when('/city/:id', {
-            templateUrl: 'templates/city-form.html',
-            controller: 'EditCityCtrl'
-        })
-        .when('/city/delete/:id', {
-            templateUrl: 'templates/city-delete.html',
-            controller: 'DeleteCityCtrl'
+            templateUrl: 'templates/city.html',
+            controller: 'CityCtrl'
         })
         .otherwise({
             redirectTo: '/'
         });
 }]);
 
-
-
-
+app.controller('HomeCtrl', function ($scope, $resource) {
+    //var Cities = $resource('/api/cities');
+    //Cities.query(function (cities) {
+    //    $scope.cities = cities;
+    //});
+});
