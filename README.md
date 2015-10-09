@@ -2,5 +2,5 @@
 
 ```
 npm install
-npm start
+npm start # on localhost:3000
 ```
