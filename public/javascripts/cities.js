@@ -5,8 +5,16 @@ app.controller('CitiesCtrl', function ($scope, $resource) {
     });
 });
 
-app.controller('CityCtrl', function ($scope, $resource) {
-
+app.controller('CityCtrl', function ($scope, $resource, $routeParams) {
+    var city = $resource(
+        '/api/cities/:id',
+        {id: $routeParams.id},
+        {query: {isArray: false}}
+    );
+    city.query(function (result) {
+        $scope.city = result;
+        console.log(result);
+    })
 });
 
 //app.controller('AddCityCtrl', ['$scope', '$resource', '$location',
