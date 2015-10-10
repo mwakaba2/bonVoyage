@@ -4,13 +4,6 @@ var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
-var livereload = require('livereload');
-var livereloadServer = livereload.createServer();
-livereloadServer.watch([
-    __dirname + "/public",
-    __dirname + "/routes",
-    __dirname + "/views"
-]);
 var mongo = require('mongodb');
 var monk = require('monk');
 
@@ -20,9 +13,16 @@ var app = express();
 var db_url = app.get('env') === 'development' ? 'localhost:27017/bonVoyage' : process.env.MONGOLAB_URI;
 var db = monk(db_url);
 
-// routes
-var routes = require('./routes/index');
-var api_cities = require('./routes/api_cities');
+// livereload
+if (app.get('env') === 'developement') {
+    var livereload = require('livereload');
+    var livereloadServer = livereload.createServer();
+    livereloadServer.watch([
+        __dirname + "/public",
+        __dirname + "/routes",
+        __dirname + "/views"
+    ]);
+}
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -35,12 +35,16 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: false}));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
+
 // Make our db accessible to our router
 app.use(function (req, res, next) {
     req.db = db;
     next();
 });
 
+// routes
+var routes = require('./routes/index');
+var api_cities = require('./routes/api_cities');
 app.use('/', routes);
 app.use('/api/cities', api_cities);
 
