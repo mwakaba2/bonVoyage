@@ -8,6 +8,8 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.4.5/angular-resource.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.4.5/angular-route.js"></script>
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+    <script src="https://app.userapp.io/js/userapp.client.js"></script>
+    <script src="https://rawgithub.com/userapp-io/userapp-angular/master/angularjs.userapp.js"></script>
     <script src="javascripts/app.js"></script>
     <script src="javascripts/cities.js"></script>
     <script src="javascripts/users.js"></script>
@@ -24,8 +26,10 @@
                 <li class="active"><a href="#/cities">Cities</a></li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
-                <li><a href="#/signup">Sign up</a></li>
-                <li><a>Log in</a></li>
+                <li ng-show="!user.authenticated"><a href="#/signup">Sign up</a></li>
+                <li ng-show="!user.authenticated"><a href="#/login">Log in</a></li>
+                <li ng-show="user.authenticated"><a href="#/user">{{user.first_name}}</a></li>
+                <li ng-show="user.authenticated"><a href="#/logout" ua-logout>Log out</a></li>
             </ul>
         </div>
     </div>
