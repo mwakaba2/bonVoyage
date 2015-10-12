@@ -43,8 +43,8 @@ app.controller('AddTravelGuideCtrl', function ($scope, $resource, $routeParams, 
         var travelGuideQuery = $resource('/api/travelGuides');
         $scope.travel_guide.city_id = $scope.city_id;
         $scope.travel_guide.user_id = $scope.user_id;
-        travelGuideQuery.save($scope.travel_guide, function() {
-            //$location.path('/');
+        travelGuideQuery.save($scope.travel_guide, function(response) {
+            $location.path('/travelGuide/' + response.id);
         });
     };
 });
