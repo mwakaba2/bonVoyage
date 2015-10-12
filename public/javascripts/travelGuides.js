@@ -39,12 +39,22 @@ app.controller('AddTravelGuideCtrl', function ($scope, $resource, $routeParams, 
     });
 
     $scope.travel_guide = {};
+    $scope.alert = false;
+
     $scope.save = function () {
-        var travelGuideQuery = $resource('/api/travelGuides');
-        $scope.travel_guide.city_id = $scope.city_id;
-        $scope.travel_guide.user_id = $scope.user_id;
-        travelGuideQuery.save($scope.travel_guide, function(response) {
-            $location.path('/travelGuide/' + response._id);
-        });
+        if ($scope.travel_guide.title === undefined) {
+            $scope.alert = "Title cannot be empty";
+        } else if ($scope.travel_guide.content === undefined) {
+            $scope.alert = "Content cannot be empty";
+        } else if ($scope.travel_guide.content.split(" ").length < 21) {
+            $scope.alert = "Content cannot be shorter than 20 words";
+        } else {
+            var travelGuideQuery = $resource('/api/travelGuides');
+            $scope.travel_guide.city_id = $scope.city_id;
+            $scope.travel_guide.user_id = $scope.user_id;
+            travelGuideQuery.save($scope.travel_guide, function(response) {
+                $location.path('/travelGuide/' + response._id);
+            });
+        }
     };
 });
