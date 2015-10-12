@@ -1,4 +1,4 @@
-var app = angular.module('bonVoyage', ['ngResource', 'ngRoute', 'UserApp']);
+var app = angular.module('bonVoyage', ['ngResource', 'ngRoute', 'UserApp','UserApp.facebook-picture']);
 
 app.config(['$routeProvider', function ($routeProvider) {
     $routeProvider
