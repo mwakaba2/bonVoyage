@@ -44,5 +44,5 @@ app.config(['$routeProvider', function ($routeProvider) {
 }]);
 
 app.run(function($rootScope, user) {
-    user.init({ appId: '5619bd59cca34' });
+    user.init({ appId: '561c1ea4dac46' });
 });
