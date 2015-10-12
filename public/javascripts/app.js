@@ -18,7 +18,7 @@ app.config(['$routeProvider', function ($routeProvider) {
         })
         .when('/signup', {
             templateUrl: 'templates/signup.html',
-            public: true,
+            public: true
         })
         .when('/login', {
             templateUrl: 'templates/login.html',
