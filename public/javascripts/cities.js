@@ -13,7 +13,6 @@ app.controller('CityCtrl', function ($scope, $resource, $routeParams) {
     );
     city.query(function (result) {
         $scope.city = result;
-        console.log(result);
     })
 });
 

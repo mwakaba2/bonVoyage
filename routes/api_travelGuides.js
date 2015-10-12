@@ -20,4 +20,14 @@ router.post('/', function (req, res) {
     });
 });
 
+router.get('/:id', function(req, res) {
+    var db = req.db;
+    var collection = db.get('travelGuides');
+    collection.findOne({ _id: req.params.id }, function(err, city){
+        if (err) throw err;
+
+        res.json(city);
+    });
+});
+
 module.exports = router;
