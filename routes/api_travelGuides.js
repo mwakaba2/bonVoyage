@@ -15,9 +15,7 @@ router.post('/', function (req, res) {
         updated_at: new Date()
     }, function (err, travelGuide) {
         if (err) throw err;
-        res.json({
-            id: travelGuide._id
-        });
+        res.json(travelGuide);
     });
 });
 
