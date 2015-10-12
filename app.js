@@ -45,8 +45,10 @@ app.use(function (req, res, next) {
 // routes
 var routes = require('./routes/index');
 var api_cities = require('./routes/api_cities');
+var api_travelGuides = require('./routes/api_travelGuides');
 app.use('/', routes);
 app.use('/api/cities', api_cities);
+app.use('/api/travelGuides', api_travelGuides);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
