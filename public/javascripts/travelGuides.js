@@ -24,10 +24,19 @@ app.controller('TravelGuideCtrl', function ($scope, $resource, $routeParams) {
 });
 
 app.controller('AddTravelGuideCtrl', function ($scope, $resource, $routeParams, $location, user) {
+    // Category choices
+    $scope.categories = [
+                            {'name': 'Gastronomy','value': 'gastronomy'},
+                            {'name': 'Entertainment', 'value': 'entertainment'},
+                            {'name': 'Nature', 'value': 'entertainment'},
+                            {'name': 'Weather', 'value': 'weather'},
+                            {'name': 'Shopping', 'value': 'shopping'},
+                            {'name': 'Etiquette', 'value': 'etiquette'},
+                            {'name': 'Sight-Seeing', 'value': 'sight-seeing'}
+                        ];
     // Get parameters
     $scope.city_id = $routeParams.city_id;
     $scope.user_id = user.current.user_id;
-
     // Fill in city
     var cityQuery = $resource(
         '/api/cities/:id',
