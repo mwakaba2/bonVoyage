@@ -74,12 +74,11 @@ app.controller('AddTravelGuideCtrl', function ($scope, $resource, $routeParams, 
 app.controller('EditTravelGuideCtrl', ['$scope', '$resource', '$location', '$routeParams',
 function($scope, $resource, $location, $routeParams){
     var TravelGuides = $resource('/api/travelGuides/:id', { id: '@_id' }, {
-       update: { method: 'PUT' }
-   });
+        update: { method: 'PUT' }
+    });
 
    TravelGuides.get({ id: $routeParams.id }, function(travelGuide){
        $scope.travelGuide = travelGuide;
-        console.log(travelGuide);
        var cityQuery = $resource(
             '/api/cities/:id',
             {id: $scope.travelGuide.city_id},
@@ -88,11 +87,11 @@ function($scope, $resource, $location, $routeParams){
         cityQuery.query(function (result) {
             $scope.city = result;
         });
-   });
+        $scope.save = function(){
+           TravelGuides.update($scope.travelGuide, function(){
+               $location.path('/travelGuide/' + $routeParams.id);
+           });
 
-   $scope.save = function(){
-       TravelGuides.update($scope.travelGuide, function(){
-           $location.path('/travelGuide/' + $routeParams.id);
-       });
-   }
+        }
+   });
 }]);

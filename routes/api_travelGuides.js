@@ -36,7 +36,10 @@ router.put('/:id', function(req, res){
        _id: req.params.id
    },
    {
+        title: req.body.title,
+        category: req.body.category,
         content: req.body.content,
+        created_at: req.body.created_at,
         updated_at: new Date()
    }, function(err, travelGuide){
        if (err) throw err;
