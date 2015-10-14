@@ -33,19 +33,31 @@ router.put('/:id', function (req, res) {
     var db = req.db;
     var collection = db.get('travelGuides');
     collection.update({
-            _id: req.params.id
-        },
-        {
-            $set: {
-                content: req.body.content,
-                updated_at: new Date()
-            }
+        _id: req.params.id
+    },
+    {
+        $set: {
+            content: req.body.content,
+            updated_at: new Date()
+        }
 
-        }, function (err, travelGuide) {
-            if (err) throw err;
+    }, function (err, travelGuide) {
+        if (err) throw err;
 
-            res.json(travelGuide);
-        });
+        res.json(travelGuide);
+    });
+});
+
+router.delete('/:id', function (req, res) {
+    var db = req.db;
+    var collection = db.get('travelGuides');
+    collection.delete({
+        _id: req.params.id
+    }, function (err) {
+        if (err) throw err;
+
+        res.json({});
+    });
 });
 
 module.exports = router;
