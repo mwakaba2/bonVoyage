@@ -26,14 +26,14 @@ app.controller('TravelGuideCtrl', function ($scope, $resource, $routeParams) {
 app.controller('AddTravelGuideCtrl', function ($scope, $resource, $routeParams, $location, user) {
     // Category choices
     $scope.categories = [
-                            {'name': 'Gastronomy','value': 'gastronomy'},
-                            {'name': 'Entertainment', 'value': 'entertainment'},
-                            {'name': 'Nature', 'value': 'entertainment'},
-                            {'name': 'Weather', 'value': 'weather'},
-                            {'name': 'Shopping', 'value': 'shopping'},
-                            {'name': 'Etiquette', 'value': 'etiquette'},
-                            {'name': 'Sight-Seeing', 'value': 'sight-seeing'}
-                        ];
+        {'name': 'Gastronomy', 'value': 'gastronomy'},
+        {'name': 'Entertainment', 'value': 'entertainment'},
+        {'name': 'Nature', 'value': 'entertainment'},
+        {'name': 'Weather', 'value': 'weather'},
+        {'name': 'Shopping', 'value': 'shopping'},
+        {'name': 'Etiquette', 'value': 'etiquette'},
+        {'name': 'Sight-Seeing', 'value': 'sight-seeing'}
+    ];
     // Get parameters
     $scope.city_id = $routeParams.city_id;
     $scope.user_id = user.current.user_id;
@@ -63,7 +63,7 @@ app.controller('AddTravelGuideCtrl', function ($scope, $resource, $routeParams, 
             var travelGuideQuery = $resource('/api/travelGuides');
             $scope.travel_guide.city_id = $scope.city_id;
             $scope.travel_guide.user_id = $scope.user_id;
-            travelGuideQuery.save($scope.travel_guide, function(response) {
+            travelGuideQuery.save($scope.travel_guide, function (response) {
                 $location.path('/travelGuide/' + response._id);
             });
         }
@@ -72,25 +72,25 @@ app.controller('AddTravelGuideCtrl', function ($scope, $resource, $routeParams, 
 
 
 app.controller('EditTravelGuideCtrl', ['$scope', '$resource', '$location', '$routeParams',
-function($scope, $resource, $location, $routeParams){
-    var TravelGuides = $resource('/api/travelGuides/:id', { id: '@_id' }, {
-        update: { method: 'PUT' }
-    });
-    TravelGuides.get({ id: $routeParams.id }, function(travelGuide){
-        $scope.travelGuide = travelGuide;
-        var cityQuery = $resource(
-            '/api/cities/:id',
-            {id: $scope.travelGuide.city_id},
-            {query: {isArray: false}}
-        );
-        cityQuery.query(function (result) {
-            $scope.city = result;
+    function ($scope, $resource, $location, $routeParams) {
+        var TravelGuides = $resource('/api/travelGuides/:id', {id: '@_id'}, {
+            update: {method: 'PUT'}
         });
-        $scope.save = function(){
-            TravelGuides.update($scope.travelGuide, function(){
-                $location.path('/travelGuide/' + $routeParams.id);
+        TravelGuides.get({id: $routeParams.id}, function (travelGuide) {
+            $scope.travelGuide = travelGuide;
+            var cityQuery = $resource(
+                '/api/cities/:id',
+                {id: $scope.travelGuide.city_id},
+                {query: {isArray: false}}
+            );
+            cityQuery.query(function (result) {
+                $scope.city = result;
             });
+            $scope.save = function () {
+                TravelGuides.update($scope.travelGuide, function () {
+                    $location.path('/travelGuide/' + $routeParams.id);
+                });
 
-        }
-    });
-}]);
+            }
+        });
+    }]);

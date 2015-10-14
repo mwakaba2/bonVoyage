@@ -19,34 +19,33 @@ router.post('/', function (req, res) {
     });
 });
 
-router.get('/:id', function(req, res) {
+router.get('/:id', function (req, res) {
     var db = req.db;
     var collection = db.get('travelGuides');
-    collection.findOne({ _id: req.params.id }, function(err, city){
+    collection.findOne({_id: req.params.id}, function (err, city) {
         if (err) throw err;
 
         res.json(city);
     });
 });
 
-router.put('/:id', function(req, res){
-   var db = req.db;
-   var collection = db.get('travelGuides');
-   collection.update({
-       _id: req.params.id
-   },
-   { 
-    $set: 
+router.put('/:id', function (req, res) {
+    var db = req.db;
+    var collection = db.get('travelGuides');
+    collection.update({
+            _id: req.params.id
+        },
         {
-            content: req.body.content,
-            updated_at: new Date()
-        }
-        
-   }, function(err, travelGuide){
-       if (err) throw err;
+            $set: {
+                content: req.body.content,
+                updated_at: new Date()
+            }
 
-       res.json(travelGuide);
-   });
+        }, function (err, travelGuide) {
+            if (err) throw err;
+
+            res.json(travelGuide);
+        });
 });
 
 module.exports = router;
