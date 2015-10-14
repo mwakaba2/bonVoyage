@@ -76,10 +76,9 @@ function($scope, $resource, $location, $routeParams){
     var TravelGuides = $resource('/api/travelGuides/:id', { id: '@_id' }, {
         update: { method: 'PUT' }
     });
-
-   TravelGuides.get({ id: $routeParams.id }, function(travelGuide){
-       $scope.travelGuide = travelGuide;
-       var cityQuery = $resource(
+    TravelGuides.get({ id: $routeParams.id }, function(travelGuide){
+        $scope.travelGuide = travelGuide;
+        var cityQuery = $resource(
             '/api/cities/:id',
             {id: $scope.travelGuide.city_id},
             {query: {isArray: false}}
@@ -88,10 +87,10 @@ function($scope, $resource, $location, $routeParams){
             $scope.city = result;
         });
         $scope.save = function(){
-           TravelGuides.update($scope.travelGuide, function(){
-               $location.path('/travelGuide/' + $routeParams.id);
-           });
+            TravelGuides.update($scope.travelGuide, function(){
+                $location.path('/travelGuide/' + $routeParams.id);
+            });
 
         }
-   });
+    });
 }]);
