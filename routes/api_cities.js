@@ -34,6 +34,17 @@ router.get('/:id', function(req, res) {
     });
 });
 
+router.get('/:id/travelGuides', function(req, res) {
+    var db = req.db;
+    var collection = db.get('travelGuides');
+    collection.find({ city_id: req.params.id }, function(err, travelGuides){
+        if (err) throw err;
+
+        res.json(travelGuides);
+    })
+
+})
+
 //router.put('/:id', function(req, res){
 //    var db = req.db;
 //    var collection = db.get('cities');

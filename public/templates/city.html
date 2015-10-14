@@ -1,23 +1,30 @@
 <div class="page-header">
     <h1>{{city.name}}</h1>
 </div>
-<div class="row">
-    <div class="col-md-4">
-        <div class="row">
-            <img ng-src="{{city.image}}" class="img-responsive img-rounded" alt="image">
+<div class="container">
+    <div class="row">
+        <div class="col-md-4">
+            <div class="row">
+                <img ng-src="{{city.image}}" class="img-responsive img-rounded" alt="image">
+            </div>
+            <div class="row">
+                <a href="http://www.huffingtonpost.com/minube/the-top-50-cities-to-see_b_5547308.html">Source</a>
+            </div>
         </div>
-        <div class="row">
-            <a href="http://www.huffingtonpost.com/minube/the-top-50-cities-to-see_b_5547308.html">Source</a>
+        <div class="col-md-8">
+            <ul class="list-group">
+                <li class="list-group-item">Country: {{city.country}}</li>
+                <li class="list-group-item">Language: {{city.language}}</li>
+                <li class="list-group-item">Currency: {{city.currency}}</li>
+                <li class="list-group-item">Timezone: {{city.timezone}}</li>
+                <li class="list-group-item">{{city.description}}</li>
+            </ul>
+            <a href="/#/travelGuide-form/{{city._id}}" class="btn btn-success" ng-show="user.authenticated">Create travel guide</a>
         </div>
     </div>
-    <div class="col-md-8">
-        <ul class="list-group">
-            <li class="list-group-item">Country: {{city.country}}</li>
-            <li class="list-group-item">Language: {{city.language}}</li>
-            <li class="list-group-item">Currency: {{city.currency}}</li>
-            <li class="list-group-item">Timezone: {{city.timezone}}</li>
-            <li class="list-group-item">{{city.description}}</li>
-        </ul>
-        <a href="/#/travelGuide-form/{{city._id}}" class="btn btn-success" ng-show="user.authenticated">Create travel guide</a>
+    <div class="col-md-4 center-block list-group">
+      <a href="#/travelGuide/{{travelGuide._id}}" ng-repeat="travelGuide in travelGuides" type="button" class="list-group-item">
+        {{travelGuide.title}}
+      </a>
     </div>
 </div>

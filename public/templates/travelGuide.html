@@ -3,15 +3,18 @@
         <small>{{city.name}}, {{city.country}}</small>
     </h1>
 </div>
-
-<div class="row">
-    <div class="col-md-8">
-        <ul class="list-group">
-            <li class="list-group-item">Category: {{travelGuide.category}}</li>
-            <li class="list-group-item">Created by: {{user.first_name}} {{user.last_name}}</li>
-            <li class="list-group-item">Created at: {{travelGuide.created_at}}</li>
-            <li class="list-group-item">Updated at: {{travelGuide.updated_at}}</li>
-            <li class="list-group-item"><p>{{travelGuide.content}}</p></li>
-        </ul>
+<div class="container">
+    <div class="row">
+        <div class="col-md-8">
+            <ul class="list-group">
+                <li class="list-group-item">Category: {{travelGuide.category}}</li>
+                <li class="list-group-item">Created by: {{user.first_name}} {{user.last_name}}</li>
+                <li class="list-group-item">Created at: {{travelGuide.created_at}}</li>
+                <li class="list-group-item">Updated at: {{travelGuide.updated_at}}</li>
+                <li class="list-group-item"><p>{{travelGuide.content}}</p></li>
+            </ul>
+        </div>
     </div>
+    <a href="/#/travelGuide-edit-form/{{city._id}}" class="btn btn-success" ng-show="user.authenticated">Update travel guide</a>
 </div>
+

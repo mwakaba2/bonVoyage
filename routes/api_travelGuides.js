@@ -29,4 +29,20 @@ router.get('/:id', function(req, res) {
     });
 });
 
+router.put('/:id', function(req, res){
+   var db = req.db;
+   var collection = db.get('travelGuides');
+   collection.update({
+       _id: req.params.id
+   },
+   {
+        content: req.body.content,
+        updated_at: new Date()
+   }, function(err, travelGuide){
+       if (err) throw err;
+
+       res.json(travelGuide);
+   });
+});
+
 module.exports = router;
