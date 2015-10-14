@@ -21,6 +21,7 @@ app.controller('CityCtrl', function ($scope, $resource, $routeParams) {
     );
     travelGuides.query(function (result) {
         $scope.travelGuides = result;
+        console.log(result);
     })
 });
 
