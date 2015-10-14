@@ -29,7 +29,6 @@ app.config(['$routeProvider', function ($routeProvider) {
             controller: 'UserCtrl'
         })
         .when('/travelGuide/:id', {
-            public: true,
             templateUrl: 'templates/travelGuide.html',
             controller: 'TravelGuideCtrl'
         })

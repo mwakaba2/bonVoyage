@@ -1,4 +1,4 @@
-app.controller('TravelGuideCtrl', function ($scope, $resource, $routeParams, $location) {
+app.controller('TravelGuideCtrl', function ($scope, $resource, $routeParams, $location, user, UserApp) {
     var travelGuideQuery = $resource(
         '/api/travelGuides/:id',
         {id: $routeParams.id},
@@ -14,10 +14,13 @@ app.controller('TravelGuideCtrl', function ($scope, $resource, $routeParams, $lo
         cityQuery.query(function (result) {
             $scope.city = result;
         });
+
         UserApp.User.get({
             "user_id": $scope.travelGuide.user_id
-        }, function (error, result) {
-            $scope.user = result;
+        }, function (err, result) {
+            $scope.author = result[0];
+            $scope.isAuthor = $scope.author.user_id === user.current.user_id;
+            $scope.$apply();
         });
     });
     $scope.delete = function () {

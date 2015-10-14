@@ -8,14 +8,16 @@
         <div class="col-md-8">
             <ul class="list-group">
                 <li class="list-group-item">Category: {{travelGuide.category}}</li>
-                <li class="list-group-item">Created by: {{user.first_name}} {{user.last_name}}</li>
+                <li class="list-group-item">Created by: {{author.first_name}} {{author.last_name}}</li>
                 <li class="list-group-item">Created at: {{travelGuide.created_at}}</li>
                 <li class="list-group-item">Updated at: {{travelGuide.updated_at}}</li>
                 <li class="list-group-item"><p>{{travelGuide.content}}</p></li>
             </ul>
         </div>
     </div>
-    <a href="/#/travelGuide-edit-form/{{travelGuide._id}}" class="btn btn-success">Update travel guide</a>
-    <button ng-click="delete()" class="btn btn-danger">Delete travel guide</button>
+    <div ng-show="isAuthor">
+        <a href="/#/travelGuide-edit-form/{{travelGuide._id}}" class="btn btn-success">Update travel guide</a>
+        <button ng-click="delete()" class="btn btn-danger">Delete travel guide</button>
+    </div>
 </div>
 
