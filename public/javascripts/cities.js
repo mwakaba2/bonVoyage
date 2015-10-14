@@ -3,6 +3,7 @@ app.controller('CitiesCtrl', function ($scope, $resource) {
     cities.query(function (cities) {
         $scope.cities = cities;
     });
+    $scope.user = UserApp.current;
 });
 
 app.controller('CityCtrl', function ($scope, $resource, $routeParams) {

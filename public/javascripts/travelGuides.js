@@ -57,6 +57,8 @@ app.controller('AddTravelGuideCtrl', function ($scope, $resource, $routeParams, 
             $scope.alert = "Content cannot be empty";
         } else if ($scope.travel_guide.content.split(" ").length < 21) {
             $scope.alert = "Content cannot be shorter than 20 words";
+        } else if ($scope.travel_guide.category === undefined) {
+            $scope.travel_guide.category = "other";
         } else {
             var travelGuideQuery = $resource('/api/travelGuides');
             $scope.travel_guide.city_id = $scope.city_id;
