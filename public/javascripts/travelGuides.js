@@ -1,4 +1,4 @@
-app.controller('TravelGuideCtrl', function ($scope, $resource, $routeParams) {
+app.controller('TravelGuideCtrl', function ($scope, $resource, $routeParams, $location) {
     var travelGuideQuery = $resource(
         '/api/travelGuides/:id',
         {id: $routeParams.id},
@@ -20,7 +20,11 @@ app.controller('TravelGuideCtrl', function ($scope, $resource, $routeParams) {
             $scope.user = result;
         });
     });
-
+    $scope.delete = function () {
+        travelGuideQuery.delete(function () {
+            $location.path('/');
+        });
+    }
 });
 
 app.controller('AddTravelGuideCtrl', function ($scope, $resource, $routeParams, $location, user) {

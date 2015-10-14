@@ -51,12 +51,12 @@ router.put('/:id', function (req, res) {
 router.delete('/:id', function (req, res) {
     var db = req.db;
     var collection = db.get('travelGuides');
-    collection.delete({
+    collection.remove({
         _id: req.params.id
-    }, function (err) {
+    }, function (err, result) {
         if (err) throw err;
 
-        res.json({});
+        res.json(result);
     });
 });
 
