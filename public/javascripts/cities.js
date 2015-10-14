@@ -14,14 +14,13 @@ app.controller('CityCtrl', function ($scope, $resource, $routeParams) {
     );
     city.query(function (result) {
         $scope.city = result;
-    })
+    });
     var travelGuides = $resource(
         '/api/cities/:id/travelGuides',
         {id: $routeParams.id}
     );
     travelGuides.query(function (result) {
         $scope.travelGuides = result;
-        console.log(result);
     })
 });
 
