@@ -19,6 +19,15 @@ router.post('/', function (req, res) {
     });
 });
 
+router.get('/', function (req, res) {
+    var db = req.db;
+    var collection = db.get('travelGuides');
+    collection.find({}, function (err, travelGuides) {
+        if (err) throw err;
+        res.json(travelGuides);
+    });
+});
+
 router.get('/:id', function (req, res) {
     var db = req.db;
     var collection = db.get('travelGuides');
@@ -33,19 +42,19 @@ router.put('/:id', function (req, res) {
     var db = req.db;
     var collection = db.get('travelGuides');
     collection.update({
-        _id: req.params.id
-    },
-    {
-        $set: {
-            content: req.body.content,
-            updated_at: new Date()
-        }
+            _id: req.params.id
+        },
+        {
+            $set: {
+                content: req.body.content,
+                updated_at: new Date()
+            }
 
-    }, function (err, travelGuide) {
-        if (err) throw err;
+        }, function (err, travelGuide) {
+            if (err) throw err;
 
-        res.json(travelGuide);
-    });
+            res.json(travelGuide);
+        });
 });
 
 router.delete('/:id', function (req, res) {

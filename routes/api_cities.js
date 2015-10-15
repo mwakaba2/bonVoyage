@@ -1,12 +1,12 @@
 var express = require('express');
 var router = express.Router();
 
-router.get('/', function(req, res) {
+router.get('/', function (req, res) {
     var db = req.db;
     var collection = db.get('cities');
-    collection.find({}, function(err,cities){
+    collection.find({}, function (err, cities) {
         if (err) throw err;
-      	res.json(cities);
+        res.json(cities);
     });
 });
 
@@ -24,20 +24,20 @@ router.get('/', function(req, res) {
 //});
 
 
-router.get('/:id', function(req, res) {
+router.get('/:id', function (req, res) {
     var db = req.db;
     var collection = db.get('cities');
-    collection.findOne({ _id: req.params.id }, function(err, city){
+    collection.findOne({_id: req.params.id}, function (err, city) {
         if (err) throw err;
 
-      	res.json(city);
+        res.json(city);
     });
 });
 
-router.get('/:id/travelGuides', function(req, res) {
+router.get('/:id/travelGuides', function (req, res) {
     var db = req.db;
     var collection = db.get('travelGuides');
-    collection.find({ city_id: req.params.id }, function(err, travelGuides){
+    collection.find({city_id: req.params.id}, function (err, travelGuides) {
         if (err) throw err;
 
         res.json(travelGuides);

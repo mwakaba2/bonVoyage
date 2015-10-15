@@ -78,26 +78,36 @@ app.controller('AddTravelGuideCtrl', function ($scope, $resource, $routeParams, 
 });
 
 
-app.controller('EditTravelGuideCtrl', ['$scope', '$resource', '$location', '$routeParams',
-    function ($scope, $resource, $location, $routeParams) {
-        var TravelGuides = $resource('/api/travelGuides/:id', {id: '@_id'}, {
-            update: {method: 'PUT'}
+app.controller('EditTravelGuideCtrl', function ($scope, $resource, $location, $routeParams) {
+    var TravelGuides = $resource('/api/travelGuides/:id', {id: '@_id'}, {
+        update: {method: 'PUT'}
+    });
+    TravelGuides.get({id: $routeParams.id}, function (travelGuide) {
+        $scope.travelGuide = travelGuide;
+        var cityQuery = $resource(
+            '/api/cities/:id',
+            {id: $scope.travelGuide.city_id},
+            {query: {isArray: false}}
+        );
+        cityQuery.query(function (result) {
+            $scope.city = result;
         });
-        TravelGuides.get({id: $routeParams.id}, function (travelGuide) {
-            $scope.travelGuide = travelGuide;
-            var cityQuery = $resource(
-                '/api/cities/:id',
-                {id: $scope.travelGuide.city_id},
-                {query: {isArray: false}}
-            );
-            cityQuery.query(function (result) {
-                $scope.city = result;
+        $scope.save = function () {
+            TravelGuides.update($scope.travelGuide, function () {
+                $location.path('/travelGuide/' + $routeParams.id);
             });
-            $scope.save = function () {
-                TravelGuides.update($scope.travelGuide, function () {
-                    $location.path('/travelGuide/' + $routeParams.id);
-                });
 
-            }
-        });
-    }]);
+        }
+    });
+});
+
+app.controller('TravelGuidesCtrl', function ($scope, $http) {
+    $http({
+        method: 'GET',
+        url: '/api/travelGuides'
+    }).then(function (response) {
+        $scope.travelGuides = response.data;
+    }, function (err) {
+        console.log(err)
+    });
+});
