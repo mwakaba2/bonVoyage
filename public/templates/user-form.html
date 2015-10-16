@@ -1,0 +1,40 @@
+<div class="page-header">
+    <h1>Update Your Profile</h1>
+</div>
+<div ng-show="alert" class="alert alert-warning" role="alert">
+    <strong>Oops!</strong> {{alert}}
+</div>
+<div class="container">
+    <div class="mainbox col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2">
+        <div class="panel panel-info">
+            <div class="panel-heading">
+                <div class="panel-title">User Profile</div>
+            </div>
+            <div class="panel-body">
+                <form class="form-horizontal" role="form">
+                    <div class="form-group">
+                        <label class="col-md-3 control-label">Location</label>
+
+                        <div class="col-md-9">
+                            <input readonly type="text" class="form-control" value="{{currentUser.properties['location'].value}}">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-md-3 control-label">About Me</label>
+
+                        <div class="col-md-9">
+                            <textarea ng-model="currentUser.properties['about_me'].value" class="form-control" rows="10"></textarea>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <!-- Button -->
+                        <div class="col-md-offset-3 col-md-9">
+                            <button ng-click="save()" class="btn btn-info"><i class="icon-hand-right"></i>Update
+                            </button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

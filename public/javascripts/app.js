@@ -28,6 +28,10 @@ app.config(['$routeProvider', function ($routeProvider) {
             templateUrl: 'templates/user.html',
             controller: 'UserCtrl'
         })
+        .when('/user-edit/:id', {
+            templateUrl: 'templates/user-form.html',
+            controller: 'EditUserCtrl'
+        })
         .when('/travelGuides', {
             templateUrl: 'templates/travelGuides.html',
             controller: 'TravelGuidesCtrl'
