@@ -41,6 +41,20 @@ app.factory("Api", function ($http, $q) {
             );
 
             return deferred.promise;
+        },
+        getTravelGuidesByCityId: function (city_id) {
+            var deferred = $q.defer();
+
+            $http.get('/api/cities/' + city_id + '/travelGuides').then(
+                function (res) {
+                    deferred.resolve(res.data);
+                },
+                function (res) {
+                    deferred.reject(res.statusMessage);
+                }
+            );
+
+            return deferred.promise;
         }
     };
 });

@@ -14,17 +14,19 @@ app.controller('CityCtrl', function ($scope, $resource, $routeParams, Api) {
         function (data) {
             $scope.city = data;
         },
-        function () {
+        function (error) {
             // TODO: error handling
         }
     );
-    var travelGuides = $resource(
-        '/api/cities/:id/travelGuides',
-        {id: $routeParams.id}
+
+    Api.getTravelGuidesByCityId($routeParams.id).then(
+        function (data) {
+            $scope.travelGuides = data;
+        },
+        function (error) {
+            // TODO: error handling
+        }
     );
-    travelGuides.query(function (result) {
-        $scope.travelGuides = result;
-    })
 });
 
 //app.controller('AddCityCtrl', ['$scope', '$resource', '$location',
