@@ -9,7 +9,7 @@ app.controller('CitiesCtrl', function ($scope, Api) {
     );
 });
 
-app.controller('CityCtrl', function ($scope, $resource, $routeParams, Api) {
+app.controller('CityCtrl', function ($scope, $routeParams, Api) {
     Api.getCityById($routeParams.id).then(
         function (data) {
             $scope.city = data;

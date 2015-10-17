@@ -1,13 +1,11 @@
-app.controller('UserCtrl', function ($scope, $resource, $routeParams, $location, user, UserApp) {
-	var currentUser = user.current;
+app.controller('UserCtrl', function ($scope, $routeParams, $location, user, UserApp) {
 	user.getCurrent().then(function(currentUser) {
 	    $scope.currentUser = currentUser;
 	});
 
 });
 
-app.controller('EditUserCtrl', function ($scope, $resource, $routeParams, $location, user, UserApp) {
-	var currentUser = user.current;
+app.controller('EditUserCtrl', function ($scope, $routeParams, $location, user, UserApp) {
 	user.getCurrent().then(function(currentUser) {
 	    $scope.currentUser = currentUser;
 	});
