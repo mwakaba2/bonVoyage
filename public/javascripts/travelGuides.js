@@ -1,32 +1,49 @@
 app.controller('TravelGuideCtrl', function ($scope, $resource, $routeParams, $location, user, UserApp, Api) {
-    var travelGuideQuery = $resource(
-        '/api/travelGuides/:id',
-        {id: $routeParams.id},
-        {query: {isArray: false}}
+    Api.getTravelGuideById($routeParams.id).then(
+        function (data) {
+            $scope.travelGuide = data;
+        },
+        function (error) {
+            // TODO: error handling
+        }
+    ).then(
+        function () {
+            return Api.getCityById($scope.travelGuide.city_id);
+        },
+        function (error) {
+            // TODO: error handling
+        }
+    ).then(
+        function (data) {
+            $scope.city = data;
+        },
+        function (error) {
+            // TODO: error handling
+        }
+    ).then(
+        function () {
+            UserApp.User.get({
+                "user_id": $scope.travelGuide.user_id
+            }, function (err, result) {
+                $scope.author = result[0];
+                $scope.isAuthor = $scope.author.user_id === user.current.user_id;
+                $scope.$apply();
+            });
+        },
+        function (error) {
+            // TODO: error handling
+        }
     );
-    travelGuideQuery.query(function (result) {
-        $scope.travelGuide = result;
-        Api.getCityById($scope.travelGuide.city_id).then(
+
+    $scope.delete = function () {
+        Api.deleteTravelGuideById($routeParams.id).then(
             function (data) {
-                $scope.city = data;
+                $location.path('/');
             },
-            function () {
+            function (error) {
                 // TODO: error handling
             }
         );
-
-        UserApp.User.get({
-            "user_id": $scope.travelGuide.user_id
-        }, function (err, result) {
-            $scope.author = result[0];
-            $scope.isAuthor = $scope.author.user_id === user.current.user_id;
-            $scope.$apply();
-        });
-    });
-    $scope.delete = function () {
-        travelGuideQuery.delete(function () {
-            $location.path('/');
-        });
     }
 });
 

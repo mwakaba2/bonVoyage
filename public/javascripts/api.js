@@ -42,6 +42,34 @@ app.factory("Api", function ($http, $q) {
 
             return deferred.promise;
         },
+        getTravelGuideById: function (id) {
+            var deferred = $q.defer();
+
+            $http.get('/api/travelGuides/' + id).then(
+                function (res) {
+                    deferred.resolve(res.data);
+                },
+                function (res) {
+                    deferred.reject(res.statusMessage);
+                }
+            );
+
+            return deferred.promise;
+        },
+        deleteTravelGuideById: function (id) {
+            var deferred = $q.defer();
+
+            $http.delete('/api/travelGuides/' + id).then(
+                function (res) {
+                    deferred.resolve(res.data);
+                },
+                function (res) {
+                    deferred.reject(res.statusMessage);
+                }
+            );
+
+            return deferred.promise;
+        },
         getTravelGuidesByCityId: function (city_id) {
             var deferred = $q.defer();
 
