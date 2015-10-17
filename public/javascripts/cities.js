@@ -1,4 +1,4 @@
-app.controller('CitiesCtrl', function ($scope, $resource, Api) {
+app.controller('CitiesCtrl', function ($scope, Api) {
     Api.getCities().then(
         function (data) {
             $scope.cities = data;
@@ -7,22 +7,17 @@ app.controller('CitiesCtrl', function ($scope, $resource, Api) {
             // TODO: error handling
         }
     );
-
-    //var cities = $resource('/api/cities');
-    //cities.query(function (cities) {
-    //    $scope.cities = cities;
-    //});
 });
 
-app.controller('CityCtrl', function ($scope, $resource, $routeParams) {
-    var city = $resource(
-        '/api/cities/:id',
-        {id: $routeParams.id},
-        {query: {isArray: false}}
+app.controller('CityCtrl', function ($scope, $resource, $routeParams, Api) {
+    Api.getCityById($routeParams.id).then(
+        function (data) {
+            $scope.city = data;
+        },
+        function () {
+            // TODO: error handling
+        }
     );
-    city.query(function (result) {
-        $scope.city = result;
-    });
     var travelGuides = $resource(
         '/api/cities/:id/travelGuides',
         {id: $routeParams.id}
