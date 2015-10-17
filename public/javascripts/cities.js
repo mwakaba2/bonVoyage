@@ -1,4 +1,5 @@
-app.controller('CitiesCtrl', function ($scope, $resource) {
+app.controller('CitiesCtrl', function ($scope, $resource, Api) {
+    console.log(Api.test("Hanjie"));
     var cities = $resource('/api/cities');
     cities.query(function (cities) {
         $scope.cities = cities;
