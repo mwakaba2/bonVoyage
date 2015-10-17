@@ -1,7 +1,21 @@
-app.factory("Api", function ($http) {
+app.factory("Api", function ($http, $q) {
     return {
-        test: function(param) {
-            return "Hello, " + param;
+        getCities: function () {
+            var deferred = $q.defer();
+
+            $http.get('/api/cities').then(
+                function (res) {
+                    deferred.resolve(res.data);
+                },
+                function (res) {
+                    deferred.reject(res.statusMessage);
+                }
+            );
+
+            return deferred.promise;
+        },
+        getCityById: function (id) {
+
         }
     };
 });
