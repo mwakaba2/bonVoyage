@@ -28,6 +28,20 @@ app.factory("Api", function ($http, $q) {
 
             return deferred.promise;
         },
+        postTravelGuide: function (new_travel_guide) {
+            var deferred = $q.defer();
+
+            $http.post('/api/travelGuides', new_travel_guide).then(
+                function (res) {
+                    deferred.resolve(res.data);
+                },
+                function (res) {
+                    deferred.reject(res.statusMessage);
+                }
+            );
+
+            return deferred.promise;
+        },
         getTravelGuides: function () {
             var deferred = $q.defer();
 
@@ -46,6 +60,20 @@ app.factory("Api", function ($http, $q) {
             var deferred = $q.defer();
 
             $http.get('/api/travelGuides/' + id).then(
+                function (res) {
+                    deferred.resolve(res.data);
+                },
+                function (res) {
+                    deferred.reject(res.statusMessage);
+                }
+            );
+
+            return deferred.promise;
+        },
+        putTravelGuideById: function (id, new_travel_guide) {
+            var deferred = $q.defer();
+
+            $http.put('/api/travelGuides/' + id, new_travel_guide).then(
                 function (res) {
                     deferred.resolve(res.data);
                 },

@@ -1,4 +1,4 @@
-app.controller('TravelGuideCtrl', function ($scope, $resource, $routeParams, $location, user, UserApp, Api) {
+app.controller('TravelGuideCtrl', function ($scope, $routeParams, $location, user, UserApp, Api) {
     Api.getTravelGuideById($routeParams.id).then(
         function (data) {
             $scope.travelGuide = data;
@@ -47,7 +47,7 @@ app.controller('TravelGuideCtrl', function ($scope, $resource, $routeParams, $lo
     }
 });
 
-app.controller('AddTravelGuideCtrl', function ($scope, $resource, $routeParams, $location, user, Api) {
+app.controller('AddTravelGuideCtrl', function ($scope, $routeParams, $location, user, Api) {
     // Category choices
     $scope.categories = [
         {'name': 'Gastronomy', 'value': 'gastronomy'},
@@ -84,40 +84,58 @@ app.controller('AddTravelGuideCtrl', function ($scope, $resource, $routeParams, 
         } else if ($scope.travel_guide.category === undefined) {
             $scope.travel_guide.category = "other";
         } else {
-            var travelGuideQuery = $resource('/api/travelGuides');
-            $scope.travel_guide.city_id = $scope.city_id;
-            $scope.travel_guide.user_id = $scope.user_id;
-            travelGuideQuery.save($scope.travel_guide, function (response) {
-                $location.path('/travelGuide/' + response._id);
-            });
+            Api.postTravelGuide($scope.travel_guide).then(
+                function (data) {
+                    $location.path('/travelGuide/' + data._id);
+                },
+                function (error) {
+                    // TODO: error handling
+                }
+            );
         }
     };
 });
 
 
-app.controller('EditTravelGuideCtrl', function ($scope, $resource, $location, $routeParams, Api) {
-    var TravelGuides = $resource('/api/travelGuides/:id', {id: '@_id'}, {
-        update: {method: 'PUT'}
-    });
-    TravelGuides.get({id: $routeParams.id}, function (travelGuide) {
-        $scope.travelGuide = travelGuide;
-
-        Api.getCityById($scope.travelGuide.city_id).then(
-            function (data) {
-                $scope.city = data;
-            },
-            function () {
-                // TODO: error handling
-            }
-        );
-
-        $scope.save = function () {
-            TravelGuides.update($scope.travelGuide, function () {
-                $location.path('/travelGuide/' + $routeParams.id);
-            });
-
+app.controller('EditTravelGuideCtrl', function ($scope, $location, $routeParams, Api) {
+    Api.getTravelGuideById($routeParams.id).then(
+        function (data) {
+            $scope.travelGuide = data;
+        },
+        function (error) {
+            // TODO: error handling
         }
-    });
+    ).then(
+        function () {
+            return Api.getCityById($scope.travelGuide.city_id);
+        },
+        function (error) {
+            // TODO: error handling
+        }
+    ).then(
+        function (data) {
+            $scope.city = data;
+        },
+        function (error) {
+            // TODO: error handling
+        }
+    ).then(
+        function () {
+            $scope.save = function () {
+                Api.putTravelGuideById($routeParams.id, $scope.travelGuide).then(
+                    function () {
+                        $location.path('/travelGuide/' + $routeParams.id);
+                    },
+                    function (error) {
+                        // TODO: error handling
+                    }
+                );
+            }
+        },
+        function (error) {
+            // TODO: error handling
+        }
+    );
 });
 
 app.controller('TravelGuidesCtrl', function ($scope, Api) {
