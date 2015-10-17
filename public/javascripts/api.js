@@ -27,6 +27,20 @@ app.factory("Api", function ($http, $q) {
             );
 
             return deferred.promise;
+        },
+        getTravelGuides: function () {
+            var deferred = $q.defer();
+
+            $http.get('/api/travelGuides').then(
+                function (res) {
+                    deferred.resolve(res.data);
+                },
+                function (res) {
+                    deferred.reject(res.statusMessage);
+                }
+            );
+
+            return deferred.promise;
         }
     };
 });

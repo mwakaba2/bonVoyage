@@ -103,13 +103,13 @@ app.controller('EditTravelGuideCtrl', function ($scope, $resource, $location, $r
     });
 });
 
-app.controller('TravelGuidesCtrl', function ($scope, $http) {
-    $http({
-        method: 'GET',
-        url: '/api/travelGuides'
-    }).then(function (response) {
-        $scope.travelGuides = response.data;
-    }, function (err) {
-        console.log(err)
-    });
+app.controller('TravelGuidesCtrl', function ($scope, Api) {
+    Api.getTravelGuides().then(
+        function (data) {
+            $scope.travelGuides = data;
+        },
+        function (error) {
+            // TODO: error handling
+        }
+    );
 });
