@@ -84,7 +84,7 @@ app.controller('AddTravelGuideCtrl', function ($scope, $routeParams, $location, 
         } else if ($scope.travel_guide.category === undefined) {
             $scope.travel_guide.category = "other";
         } else {
-            Api.postTravelGuide($scope.travel_guide).then(
+            Api.createTravelGuide($scope.travel_guide).then(
                 function (data) {
                     $location.path('/travelGuide/' + data._id);
                 },
@@ -122,7 +122,7 @@ app.controller('EditTravelGuideCtrl', function ($scope, $location, $routeParams,
     ).then(
         function () {
             $scope.save = function () {
-                Api.putTravelGuideById($routeParams.id, $scope.travelGuide).then(
+                Api.updateTravelGuideById($routeParams.id, $scope.travelGuide).then(
                     function () {
                         $location.path('/travelGuide/' + $routeParams.id);
                     },
