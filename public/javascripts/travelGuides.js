@@ -142,6 +142,16 @@ app.controller('TravelGuidesCtrl', function ($scope, Api) {
     Api.getTravelGuides().then(
         function (data) {
             $scope.travelGuides = data;
+            angular.forEach($scope.travelGuides,function(travelGuide){
+                Api.getCityById(travelGuide.city_id).then(
+                    function (data) {
+                        $scope.city = data;
+                    },
+                    function () {
+                        // TODO: error handling
+                    }
+                );
+            });
         },
         function (error) {
             // TODO: error handling
