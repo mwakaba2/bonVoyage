@@ -58,11 +58,8 @@ app.controller('AddTravelGuideCtrl', function ($scope, $routeParams, $location, 
         {'name': 'Etiquette', 'value': 'etiquette'},
         {'name': 'Sight-Seeing', 'value': 'sight-seeing'}
     ];
-    // Get parameters
-    $scope.city_id = $routeParams.city_id;
-    $scope.user_id = user.current.user_id;
 
-    Api.getCityById($scope.city_id).then(
+    Api.getCityById($routeParams.city_id).then(
         function (data) {
             $scope.city = data;
         },
@@ -71,8 +68,11 @@ app.controller('AddTravelGuideCtrl', function ($scope, $routeParams, $location, 
         }
     );
 
-    $scope.travel_guide = {};
     $scope.alert = false;
+
+    $scope.travel_guide = {};
+    $scope.travel_guide.city_id = $routeParams.city_id;
+    $scope.travel_guide.user_id = user.current.user_id;
 
     $scope.save = function () {
         if ($scope.travel_guide.title === undefined) {
