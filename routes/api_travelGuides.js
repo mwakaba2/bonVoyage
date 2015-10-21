@@ -69,4 +69,13 @@ router.delete('/:id', function (req, res) {
     });
 });
 
+router.get('/user/:user_id', function (req, res) {
+    var collection = req.db.get('travelGuides');
+    collection.find({'user_id': req.params.user_id}, function (err, travel_guides) {
+        if (err) throw err;
+
+        res.json(travel_guides);
+    });
+});
+
 module.exports = router;

@@ -1,26 +1,51 @@
-app.controller('UserCtrl', function ($scope, $routeParams, $location, user, UserApp) {
-	user.getCurrent().then(function(currentUser) {
-	    $scope.currentUser = currentUser;
-	});
+app.controller('UserCtrl', function ($scope, $routeParams, $location, user, Api) {
+    user.getCurrent().then(function (currentUser) {
+        $scope.currentUser = currentUser;
+    }).then(
+        function () {
+            return Api.getTravelGuidesByUserId($scope.currentUser.user_id);
+        },
+        function (err) {
+            // TODO: error handling here
+        }
+    ).then(
+        function (travel_guides_by_user) {
+            $scope.travelGuides = travel_guides_by_user;
+
+            angular.forEach($scope.travelGuides, function (travelGuide, index) {
+                Api.getCityById(travelGuide.city_id).then(
+                    function (data) {
+                        $scope.travelGuides[index].city = data;
+                    },
+                    function () {
+                        // TODO: error handling
+                    }
+                );
+            });
+        },
+        function (err) {
+            // TODO: error handling here
+        }
+    );
 
 });
 
 app.controller('EditUserCtrl', function ($scope, $routeParams, $location, user, UserApp) {
-	user.getCurrent().then(function(currentUser) {
-	    $scope.currentUser = currentUser;
-	});
-	$scope.save = function () {
-		UserApp.User.save({	
-			"user_id": "self",
-		    "properties": {
-		        "about_me": {
-		            "value": $scope.currentUser.properties['about_me'].value,
-		            "override": true
-		        }
-		    }
-		}, function(error, result){
-	    	// Handle error/result
-		});
-		$location.path('/user');
-	}
+    user.getCurrent().then(function (currentUser) {
+        $scope.currentUser = currentUser;
+    });
+    $scope.save = function () {
+        UserApp.User.save({
+            "user_id": "self",
+            "properties": {
+                "about_me": {
+                    "value": $scope.currentUser.properties['about_me'].value,
+                    "override": true
+                }
+            }
+        }, function (error, result) {
+            // Handle error/result
+        });
+        $location.path('/user');
+    }
 });

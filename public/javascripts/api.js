@@ -111,6 +111,20 @@ app.factory("Api", function ($http, $q) {
             );
 
             return deferred.promise;
+        },
+        getTravelGuidesByUserId: function (user_id) {
+            var deferred = $q.defer();
+
+            $http.get('/api/travelGuides/user/' + user_id).then(
+                function (res) {
+                    deferred.resolve(res.data);
+                },
+                function (res) {
+                    deferred.reject(res.statusMessage);
+                }
+            );
+
+            return deferred.promise;
         }
     };
 });

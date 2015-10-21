@@ -143,7 +143,7 @@ app.controller('TravelGuidesCtrl', function ($scope, $parse, Api) {
         function (data) {
             $scope.travelGuides = data;
 
-            angular.forEach($scope.travelGuides,function(travelGuide, index){
+            angular.forEach($scope.travelGuides, function (travelGuide, index) {
                 Api.getCityById(travelGuide.city_id).then(
                     function (data) {
                         $scope.travelGuides[index].city = data;
