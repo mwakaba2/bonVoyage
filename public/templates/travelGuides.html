@@ -3,10 +3,10 @@
 	    <a href="#/travelGuide/{{travelGuide._id}}" ng-repeat="travelGuide in travelGuides" class="list-group-item">
 	    	<h3>
 	    			{{travelGuide.title}} </br>
-	    			<small>{{city.name}}, {{city.country}}</small>
+	    			<small>{{travelGuide.city.name}}, {{travelGuide.city.country}}</small>
 	    	</h3>
 	    	<h5>Category: {{travelGuide.category}}</h5>
-	    	<p class="text-overflow">{{travelGuide.content | limitTo: 250 }}</p>
+	    	<p>{{travelGuide.content | limitTo: 250 }}...</p>
 	    </a>
 	</ul>
 </div>

@@ -138,14 +138,15 @@ app.controller('EditTravelGuideCtrl', function ($scope, $location, $routeParams,
     );
 });
 
-app.controller('TravelGuidesCtrl', function ($scope, Api) {
+app.controller('TravelGuidesCtrl', function ($scope, $parse, Api) {
     Api.getTravelGuides().then(
         function (data) {
             $scope.travelGuides = data;
-            angular.forEach($scope.travelGuides,function(travelGuide){
+
+            angular.forEach($scope.travelGuides,function(travelGuide, index){
                 Api.getCityById(travelGuide.city_id).then(
                     function (data) {
-                        $scope.city = data;
+                        $scope.travelGuides[index].city = data;
                     },
                     function () {
                         // TODO: error handling
