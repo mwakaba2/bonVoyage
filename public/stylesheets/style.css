@@ -25,3 +25,7 @@ fieldset {
 	padding-bottom: 10px;
 }
 
+/*** City Profile ***/
+#map {
+	height: 180px;
+}
