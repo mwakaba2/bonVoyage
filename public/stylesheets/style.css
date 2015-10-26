@@ -26,6 +26,7 @@ fieldset {
 }
 
 /*** City Profile ***/
-#map {
-	height: 180px;
+.map {
+	width: 60%;
+	height: 600px;
 }
