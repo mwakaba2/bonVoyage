@@ -1,6 +1,6 @@
 import json
 
-attributes = ["currency", "description", "image", "language", "timezone"]
+attributes = ["currency", "description", "image", "language", "timezone", "geocode"]
 
 files_names = map(lambda attribute: attribute + ".json", attributes)
 
