@@ -15,6 +15,11 @@ app.controller('CityCtrl', function ($scope, $routeParams, Api, leafletData, lea
         center : {},
         layers: {
             baselayers: {
+                googleRoadmap: {
+                    name: 'Google Streets',
+                    layerType: 'ROADMAP',
+                    type: 'google'
+                },
                 googleTerrain: {
                     name: 'Google Terrain',
                     layerType: 'TERRAIN',
@@ -23,11 +28,6 @@ app.controller('CityCtrl', function ($scope, $routeParams, Api, leafletData, lea
                 googleHybrid: {
                     name: 'Google Hybrid',
                     layerType: 'HYBRID',
-                    type: 'google'
-                },
-                googleRoadmap: {
-                    name: 'Google Streets',
-                    layerType: 'ROADMAP',
                     type: 'google'
                 }
             }
@@ -42,7 +42,7 @@ app.controller('CityCtrl', function ($scope, $routeParams, Api, leafletData, lea
                 [geocode[2], geocode[3]]
             ]);
             $scope.bounds = bounds;
-            
+
             
         },
         function (error) {
