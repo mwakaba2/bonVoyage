@@ -9,10 +9,41 @@ app.controller('CitiesCtrl', function ($scope, Api) {
     );
 });
 
-app.controller('CityCtrl', function ($scope, $routeParams, Api) {
+app.controller('CityCtrl', function ($scope, $routeParams, Api, leafletData, leafletBoundsHelpers) {
+    angular.extend($scope, {
+        bounds : {},
+        center : {},
+        layers: {
+            baselayers: {
+                googleTerrain: {
+                    name: 'Google Terrain',
+                    layerType: 'TERRAIN',
+                    type: 'google'
+                },
+                googleHybrid: {
+                    name: 'Google Hybrid',
+                    layerType: 'HYBRID',
+                    type: 'google'
+                },
+                googleRoadmap: {
+                    name: 'Google Streets',
+                    layerType: 'ROADMAP',
+                    type: 'google'
+                }
+            }
+        }
+    });
     Api.getCityById($routeParams.id).then(
         function (data) {
             $scope.city = data;
+            var geocode = $scope.city.geocode;
+            var bounds = leafletBoundsHelpers.createBoundsFromArray([
+                [geocode[0], geocode[1]],
+                [geocode[2], geocode[3]]
+            ]);
+            $scope.bounds = bounds;
+            
+            
         },
         function (error) {
             // TODO: error handling
@@ -27,6 +58,7 @@ app.controller('CityCtrl', function ($scope, $routeParams, Api) {
             // TODO: error handling
         }
     );
+
 });
 
 //app.controller('AddCityCtrl', ['$scope', '$resource', '$location',
