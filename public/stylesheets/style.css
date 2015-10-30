@@ -30,3 +30,7 @@ fieldset {
 	width: 60%;
 	height: 600px;
 }
+
+.tabs-container {
+	margin-top: 60px;
+}
