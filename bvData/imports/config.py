@@ -1,5 +1,5 @@
 local = {
-    host: "localhost"
+    host: "localhost:27017"
     db_anme: "bonVoyage"
     collection: "cities"
     username: ""
