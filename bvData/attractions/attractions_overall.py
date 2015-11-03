@@ -22,10 +22,10 @@ with open('attraction_links.json') as _input_file:
 
 
 # Overall attractions
-def attractions_overall(_url):
-    print "Getting overall attractions for " + _url
+def attractions_overall(_city):
+    print "Getting overall attractions for " + _city["name"]
     # Download
-    _html = urllib2.urlopen(_url).read()
+    _html = urllib2.urlopen(_city["data"]).read()
     _soup = BeautifulSoup(_html, 'html.parser')
     # Extract
     _attraction_divs = _soup.findAll(
@@ -37,7 +37,10 @@ def attractions_overall(_url):
         __name = __attraction_div.find("span", {"class": "filter_name"}).text
         __count = int(__attraction_div.find("span", {"class": "filter_count"}).text[1:-1])
         _attractions[__name] = __count
-    return _attractions
+    return {
+        "name": _city["name"],
+        "data": _attractions
+    }
 
 
 with open('attractions_overall.json', 'w') as _output_file:

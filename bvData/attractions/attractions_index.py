@@ -24,6 +24,9 @@ import math
 with open('attractions_overall.json') as _input_file:
     raw_data = json.load(_input_file)
 
+cities = map(lambda i: i["name"], raw_data)
+raw_data = map(lambda i: i["data"], raw_data)
+
 # Gather all categories
 all_categories = set()
 for _city in raw_data:
@@ -120,6 +123,12 @@ for _city_index in range(0, len(raw_data)):
         __horizontal_index = horizontal_indices[_city_index][__category]
         __final_index = (__vertical_index + __horizontal_index) / 2
         raw_data[_city_index][__category] = __final_index
+
+for _index, _data in enumerate(raw_data):
+    raw_data[_index] = {
+        "name": cities[_index],
+        "data": _data
+    }
 
 with open('attractions_index.json', 'w') as _file:
     json.dump(raw_data, _file)
