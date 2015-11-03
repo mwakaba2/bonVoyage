@@ -1,15 +1,15 @@
 local = {
-    host: "localhost:27017"
-    db_anme: "bonVoyage"
-    collection: "cities"
-    username: ""
-    password: ""
+    "uri": "mongodb://localhost:27017/",
+    "db_name": "bonVoyage",
+    "collection": "cities",
+    "username": "",
+    "password": "",
 }
 
 heroku = {
-    host: "ds033018.mongolab.com:33018"
-    db_anme: "heroku_358800q5"
-    collection: "cities"
-    username: "bv"
-    password: "bonvoyage2015"
+    "uri": "mongodb://ds033018.mongolab.com:33018/",
+    "db_name": "heroku_358800q5",
+    "collection": "cities",
+    "username": "bv",
+    "password": "bonvoyage2015"
 }
