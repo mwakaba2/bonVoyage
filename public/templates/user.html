@@ -30,9 +30,9 @@
             <div class="tab-content">
                 <div role="tabpanel" class="tab-pane fade in active" id="bookmarked-cities">
                     <div class="list-group">
-                        <div ng-repeat="city in bookmarked_cities" type="button" class="list-group-item">
-                            {{city}}
-                        </div>
+                        <a href="#/city/{{city._id}}" ng-repeat="city in bookmarked_cities" type="button" class="list-group-item">
+                            {{city.name}}
+                        </a>
                     </div>
                 </div>
                 <div role="tabpanel" class="tab-pane fade" id="travel-g-list">
