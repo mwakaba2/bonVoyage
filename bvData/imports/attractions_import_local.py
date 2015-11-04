@@ -1,4 +1,4 @@
-import attractions_index_base
+import attractions_base
 import config
 
-attractions_index_base.attraction_index_import(config.local)
+attractions_base.attractions_import(config.local)

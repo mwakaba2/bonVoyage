@@ -1,0 +1,4 @@
+import attractions_raw_base
+import config
+
+attractions_raw_base.attractions_raw_import(config.heroku)

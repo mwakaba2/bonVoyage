@@ -6,7 +6,7 @@ import json
 # Input format:
 # ["http://...", ...]
 
-# Output: corresponding attractions_overall.json file
+# Output: corresponding attractions_raw.json file
 # Output format:
 # [
 #   {
@@ -43,6 +43,6 @@ def attractions_overall(_city):
     }
 
 
-with open('attractions_overall.json', 'w') as _output_file:
+with open('attractions_raw.json', 'w') as _output_file:
     json.dump(map(attractions_overall, data), _output_file)
 

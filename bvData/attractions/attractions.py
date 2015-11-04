@@ -9,7 +9,7 @@ import math
 #   ...
 # ]
 
-# Output: corresponding attractions_index.json file
+# Output: corresponding attractions.json file
 # For each city-category pair, its index is computed as following:
 # Form normal distribution for all categories within a city, assign index 1 to 5 for each category
 # Form normal distribution for all cities within a category, assign index 1 to 5 for each city
@@ -21,7 +21,7 @@ import math
 #   ...
 # ]
 
-with open('attractions_overall.json') as _input_file:
+with open('attractions_raw.json') as _input_file:
     raw_data = json.load(_input_file)
 
 cities = map(lambda i: i["name"], raw_data)
@@ -130,5 +130,5 @@ for _index, _data in enumerate(raw_data):
         "data": _data
     }
 
-with open('attractions_index.json', 'w') as _file:
+with open('attractions.json', 'w') as _file:
     json.dump(raw_data, _file)
