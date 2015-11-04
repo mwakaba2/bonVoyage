@@ -17,7 +17,8 @@ fieldset {
 }
 
 .item {
-	margin-bottom: 45px;
+	height: 590px;
+	margin-top: 20px;
 }
 
 /*** Cities page ***/
