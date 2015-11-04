@@ -3,7 +3,6 @@
  */
 
 /* global google: true */
-
 L.Google = L.Class.extend({
 	includes: L.Mixin.Events,
 

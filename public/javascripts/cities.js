@@ -10,8 +10,8 @@ app.controller('CitiesCtrl', function ($scope, Api) {
 });
 
 app.controller('CityCtrl', function ($scope, $routeParams, Api, leafletData, leafletBoundsHelpers) {
+    var geocode;
     angular.extend($scope, {
-        bounds : {},
         center : {},
         layers: {
             baselayers: {
@@ -31,19 +31,38 @@ app.controller('CityCtrl', function ($scope, $routeParams, Api, leafletData, lea
                     type: 'google'
                 }
             }
+        },
+        defaults: {
+            scrollWheelZoom: false
         }
     });
+
     Api.getCityById($routeParams.id).then(
         function (data) {
             $scope.city = data;
-            var geocode = $scope.city.geocode;
+            geocode = $scope.city.geocode;
             var bounds = leafletBoundsHelpers.createBoundsFromArray([
                 [geocode[0], geocode[1]],
                 [geocode[2], geocode[3]]
             ]);
-            $scope.bounds = bounds;
-
             
+            angular.extend($scope, {
+                bounds : bounds,
+                maxBounds: bounds,
+                paths: {
+                    circle: {
+                        type: 'circleMarker',
+                        latlngs: {
+                            lat: geocode[0],
+                            lng: geocode[3]
+                        },
+                        color: '#ff612f',
+                        weight: 2,
+                        radius: 100
+                    }
+                }
+            });
+
         },
         function (error) {
             // TODO: error handling
@@ -58,6 +77,10 @@ app.controller('CityCtrl', function ($scope, $routeParams, Api, leafletData, lea
             // TODO: error handling
         }
     );
+
+    angular.extend($scope, {
+        paths: {}
+    });
 
 });
 
