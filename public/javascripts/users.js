@@ -44,7 +44,7 @@ app.controller('EditUserCtrl', function ($scope, $routeParams, $location, user, 
                 }
             }
         }, function (error, result) {
-            // Handle error/result
+            // TODO: Handle error/result
         });
         $location.path('/user');
     }

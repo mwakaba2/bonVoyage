@@ -9,7 +9,7 @@ app.controller('CitiesCtrl', function ($scope, Api) {
     );
 });
 
-app.controller('CityCtrl', function ($scope, $routeParams, Api, leafletData, leafletBoundsHelpers) {
+app.controller('CityCtrl', function ($scope, $routeParams, Api, leafletData, leafletBoundsHelpers, user, UserApp) {
     angular.extend($scope, {
         bounds : {},
         center : {},
@@ -33,6 +33,7 @@ app.controller('CityCtrl', function ($scope, $routeParams, Api, leafletData, lea
             }
         }
     });
+
     Api.getCityById($routeParams.id).then(
         function (data) {
             $scope.city = data;
@@ -43,7 +44,35 @@ app.controller('CityCtrl', function ($scope, $routeParams, Api, leafletData, lea
             ]);
             $scope.bounds = bounds;
 
-            
+            if (user.current.authenticated) {
+                user.getCurrent().then(function (currentUser) {
+                    $scope.bookmarked_cities = JSON.parse(currentUser.properties.bookmarked_cities.value);
+                    $scope.bookmarked = $scope.bookmarked_cities.indexOf($scope.city.name) !== -1;
+
+                    $scope.toggleBookmark = function () {
+                        if ($scope.bookmarked) {
+                            var index = $scope.bookmarked_cities.indexOf($scope.city.name);
+                            if (index > -1) {
+                                $scope.bookmarked_cities.splice(index, 1);
+                            }
+                        } else {
+                            $scope.bookmarked_cities.push($scope.city.name);
+                        }
+                        $scope.bookmarked = !$scope.bookmarked;
+                        UserApp.User.save({
+                            "user_id": "self",
+                            "properties": {
+                                "bookmarked_cities": JSON.stringify($scope.bookmarked_cities),
+                                "override": true
+                            }
+                        }, function () {
+                            // TODO: error handling
+                        });
+                    };
+                }, function (err) {
+                    // TODO: error handling
+                })
+            }
         },
         function (error) {
             // TODO: error handling
