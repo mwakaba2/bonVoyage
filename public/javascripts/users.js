@@ -11,6 +11,9 @@ app.controller('UserCtrl', function ($scope, $routeParams, $location, user, Api)
     ).then(
         function (travel_guides_by_user) {
             $scope.travelGuides = travel_guides_by_user;
+            $scope.bookmarked_cities = JSON.parse($scope.currentUser.properties.bookmarked_cities.value);
+
+            console.log($scope.bookmarked_cities);
 
             angular.forEach($scope.travelGuides, function (travelGuide, index) {
                 Api.getCityById(travelGuide.city_id).then(

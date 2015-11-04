@@ -1,5 +1,5 @@
 <div class='container'>
-    <div class="item row">
+    <div class="row">
         <div class="col-md-4 col-md-offset-4">
             <h1 class="text-center">{{currentUser.first_name}}</h1>
             <img ua-facebook-picture="large" class="img-circle center-block">
@@ -10,17 +10,45 @@
             <a href="/#/user-edit/{{currentUser.user_id}}" class="btn btn-success center-block">Update User Profile</a>
         </div>
     </div>
-    <div class="item row">
-	    <ul class="list-group col-md-8 col-md-offset-2">
-	        <a href="#/travelGuide/{{travelGuide._id}}" ng-repeat="travelGuide in travelGuides" class="list-group-item">
-	            <h3>
-	                {{travelGuide.title}} </br>
-	                <small>{{travelGuide.city.name}}, {{travelGuide.city.country}}</small>
-	            </h3>
-	            <h5>Category: {{travelGuide.category}}</h5>
+    <div class="row">
+        <div class="tabs-container">
+            <!-- Nav tabs -->
+            <ul id="tabs" class="nav nav-tabs" data-tabs="tabs">
+                <li role="presentation" class="active">
+                    <a href="#bookmarked-cities" data-toggle="tab" target="_self">
+                        Bookmarked cities
+                    </a>
+                </li>
+                <li role="presentation">
+                    <a href="#travel-g-list" data-toggle="tab" target="_self">
+                        Travel Guides
+                    </a>
+                </li>
+            </ul>
 
-	            <p>{{travelGuide.content | limitTo: 250 }}...</p>
-	        </a>
-	    </ul>
-	  </div>
+            <!-- Tab panes -->
+            <div class="tab-content">
+                <div role="tabpanel" class="tab-pane fade in active" id="bookmarked-cities">
+                    <div class="list-group">
+                        <div ng-repeat="city in bookmarked_cities" type="button" class="list-group-item">
+                            {{city}}
+                        </div>
+                    </div>
+                </div>
+                <div role="tabpanel" class="tab-pane fade" id="travel-g-list">
+                    <ul class="list-group col-md-8 col-md-offset-2">
+                        <a href="#/travelGuide/{{travelGuide._id}}" ng-repeat="travelGuide in travelGuides" class="list-group-item">
+                            <h3>
+                                {{travelGuide.title}} </br>
+                                <small>{{travelGuide.city.name}}, {{travelGuide.city.country}}</small>
+                            </h3>
+                            <h5>Category: {{travelGuide.category}}</h5>
+
+                            <p>{{travelGuide.content | limitTo: 250 }}...</p>
+                        </a>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
