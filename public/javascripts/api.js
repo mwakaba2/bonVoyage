@@ -28,6 +28,20 @@ app.factory("Api", function ($http, $q) {
 
             return deferred.promise;
         },
+        getCityIdByName: function (name) {
+            var deferred = $q.defer();
+
+            $http.get('/api/cities/name/' + name).then(
+                function (res) {
+                    deferred.resolve(res.data._id);
+                },
+                function (res) {
+                    deferred.reject(res.statusMessage);
+                }
+            );
+
+            return deferred.promise;
+        },
         createTravelGuide: function (new_travel_guide) {
             var deferred = $q.defer();
 

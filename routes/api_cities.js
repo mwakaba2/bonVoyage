@@ -43,7 +43,20 @@ router.get('/:id/travelGuides', function (req, res) {
         res.json(travelGuides);
     })
 
-})
+});
+
+router.get('/name/:name', function (req, res) {
+    var collections = req.db.get('cities');
+    collections.findOne({
+        name: req.params.name
+    }, function (err, result) {
+        if (err) throw err;
+
+        res.json({
+            _id: result._id
+        })
+    });
+});
 
 //router.put('/:id', function(req, res){
 //    var db = req.db;
