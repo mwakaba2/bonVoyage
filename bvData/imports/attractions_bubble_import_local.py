@@ -1,0 +1,4 @@
+import attractions_bubble_base
+import config
+
+attractions_bubble_base.attractions_bubble_import(config.local)
