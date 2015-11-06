@@ -52,7 +52,7 @@ app.controller('CityCtrl', function ($scope, $routeParams, Api, leafletData, lea
 
             $scope.bounds = bounds;
             $scope.maxBounds = bounds;
-            var things_to_do = $scope.city.attractions_raw;
+            var things_to_do = $scope.city.attractions_bubble;
             var random_coordinates = [];
             var num_indices = Object.keys(things_to_do).length;
 
@@ -79,7 +79,7 @@ app.controller('CityCtrl', function ($scope, $routeParams, Api, leafletData, lea
                     },
                     color: '#'+Math.floor(Math.random()*16777215).toString(16),
                     weight: 2,
-                    radius: value/2,
+                    radius: value,
                     message: '<h5 class="text-center"><b>'+category+'</b></h5><h6>'+value+' Things to do</h6><a href="'+link+'">Check it out!</a>'
                 }
             }
