@@ -86,9 +86,11 @@ app.controller('CityCtrl', function ($scope, $routeParams, Api, leafletData, lea
 
             if (user.current.authenticated) {
                 user.getCurrent().then(function (currentUser) {
+                    // Decide whether the current city is bookmarked
                     var bookmarked_cities = JSON.parse(currentUser.properties.bookmarked_cities.value);
                     $scope.bookmarked = bookmarked_cities.indexOf($scope.city.name) !== -1;
 
+                    // Set up click listener for bookmark button
                     $scope.toggleBookmark = function () {
                         user.getCurrent().then(function (currentUser) {
                             var bookmarked_cities = JSON.parse(currentUser.properties.bookmarked_cities.value);
@@ -114,6 +116,23 @@ app.controller('CityCtrl', function ($scope, $routeParams, Api, leafletData, lea
                             // TODO: error handling
                         });
                     };
+
+                    // Add current city to viewed cities
+                    var viewed_cities = JSON.parse(currentUser.properties.viewed_cities.value);
+                    viewed_cities.push($scope.city.name);
+                    console.log(viewed_cities);
+                    if (viewed_cities.length >= 11) {
+                        viewed_cities.pop();
+                    }
+                    UserApp.User.save({
+                        "user_id": "self",
+                        "properties": {
+                            "viewed_cities": JSON.stringify(viewed_cities),
+                            "override": true
+                        }
+                    }, function () {
+                        // TODO: error handling
+                    });
                 }, function (err) {
                     // TODO: error handling
                 })
