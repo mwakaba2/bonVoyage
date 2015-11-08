@@ -1,0 +1,4 @@
+import attraction_links_base
+import config
+
+attraction_links_base.attraction_links_import(config.local)

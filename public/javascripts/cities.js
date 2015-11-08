@@ -70,7 +70,7 @@ app.controller('CityCtrl', function ($scope, $routeParams, Api, leafletData, lea
                 var coords = random_coordinates.pop();
                 var value = parseInt(things_to_do[category]);
                 var marker = category.split(' ')[0];
-                var link = "#";
+                var link = $scope.city.attractions_link;
                 $scope.paths[marker] = {
                     type: 'circleMarker',
                     latlngs: {
@@ -80,7 +80,7 @@ app.controller('CityCtrl', function ($scope, $routeParams, Api, leafletData, lea
                     color: '#'+Math.floor(Math.random()*16777215).toString(16),
                     weight: 2,
                     radius: value,
-                    message: '<h5 class="text-center"><b>'+category+'</b></h5><h6>'+value+' Things to do</h6><a href="'+link+'">Check it out!</a>'
+                    message: '<h5 class="text-center"><b>'+category+'</b></h5><h6>'+value+' Things to do</h6><a target="_blank" href="'+link+'">Check it out!</a>'
                 }
             }
 

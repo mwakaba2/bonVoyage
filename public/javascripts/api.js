@@ -1,4 +1,4 @@
-app.factory("Api", function ($http, $q) {
+app.factory("Api", function ($http, $q, $window) {
     return {
         getCities: function () {
             var deferred = $q.defer();
