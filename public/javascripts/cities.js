@@ -9,7 +9,7 @@ app.controller('CitiesCtrl', function ($scope, Api) {
     );
 });
 
-app.controller('CityCtrl', function ($scope, $routeParams, Api, leafletData, leafletBoundsHelpers, user, UserApp) {
+app.controller('CityCtrl', function ($scope, $routeParams, Api, DataVis, leafletData, leafletBoundsHelpers, user, UserApp) {
     angular.extend($scope, {
         center : {},
         layers: {
@@ -71,13 +71,14 @@ app.controller('CityCtrl', function ($scope, $routeParams, Api, leafletData, lea
                 var value = parseInt(things_to_do[category]);
                 var marker = category.split(' ')[0];
                 var link = $scope.city.attractions_link;
+                var randColor = DataVis.getRandHexColor();
                 $scope.paths[marker] = {
                     type: 'circleMarker',
                     latlngs: {
                         lat: coords.lat,
                         lng: coords.lng
                     },
-                    color: '#'+Math.floor(Math.random()*16777215).toString(16),
+                    color: randColor,
                     weight: 2,
                     radius: value,
                     message: '<h5 class="text-center"><b>'+category+'</b></h5><h6>'+value+' Things to do</h6><a target="_blank" href="'+link+'">Check it out!</a>'
