@@ -12,13 +12,15 @@ var OrderedVector = function (object) {
     }
 };
 
-OrderedVector.prototype.put = function (key, value) {
-    this.keys.push(key);
-    this.values.push(value);
-};
-
 OrderedVector.prototype.contains = function (key) {
     return this.keys.indexOf(key) !== -1;
+};
+
+OrderedVector.prototype.put = function (key, value) {
+    if (!this.contains(key)) {
+        this.keys.push(key);
+        this.values.push(value);
+    }
 };
 
 OrderedVector.prototype.find = function (key) {
@@ -44,3 +46,5 @@ OrderedVector.prototype.dotProduct = function (that) {
     }
     return result;
 };
+
+module.exports = OrderedVector;
