@@ -51,6 +51,7 @@ app.controller('CityCtrl', function ($scope, $routeParams, Api, DataVis, leaflet
             var maxLng = Math.max(geocode[1], geocode[3]);
 
             $scope.bounds = bounds;
+            console.log($scope.bounds);
             $scope.maxBounds = bounds;
             var things_to_do = $scope.city.attractions_bubble;
             var random_coordinates = [];
@@ -81,6 +82,7 @@ app.controller('CityCtrl', function ($scope, $routeParams, Api, DataVis, leaflet
                     color: randColor,
                     weight: 2,
                     radius: value,
+                    fillOpacity: 0.4,
                     message: '<h5 class="text-center"><b>'+category+'</b></h5><h6>'+value+' Things to do</h6><a target="_blank" href="'+link+'">Check it out!</a>'
                 }
             }
