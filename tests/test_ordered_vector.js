@@ -64,6 +64,9 @@ module.exports = {
             'sight-seeing': 4,
             'museum': 3
         });
+        test.throws(function () {
+            this.sample_vector.dotProduct(sample_bad_vector)
+        }, Error, 'dot product two vectors with different ordered set of keys should throw');
 
         var sample_bad_vector_2 = new OrderedVector({
             'sight-seeing': 4,
@@ -71,6 +74,19 @@ module.exports = {
             'museum': 3,
             'sports': 4
         });
+        test.throws(function () {
+            this.sample_vector.dotProduct(sample_bad_vector_2)
+        }, Error, 'dot product two vectors with different ordered set of keys should throw');
+
+        var sample_bad_vector_3 = new OrderedVector({
+            'sight-seeing': 4,
+            'museum': 3,
+            'nightlife': 5
+        });
+        test.throws(function () {
+            this.sample_vector.dotProduct(sample_bad_vector_3)
+        }, Error, 'dot product two vectors with different ordered set of keys should throw');
+
         test.done();
     }
 };

@@ -33,16 +33,20 @@ OrderedVector.prototype.find = function (key) {
 };
 
 OrderedVector.prototype.dotProduct = function (that) {
+    if (this.keys.length !== that.keys.length) {
+        throw new Error(that + " should have the same key set with " + this);
+    }
+
     var result = new OrderedVector();
     for (var i = 0 ; i < this.keys.length ; ++i) {
         var thisKey = this.keys[i];
-        if (!that.contains(thisKey)) {
-            throw new Error(that + " does not have key " + thisKey);
-        } else {
-            var thisValue = this.find(thisKey);
-            var thatValue = that.find(thisKey);
-            result.put(thisKey, thisValue * thatValue);
+        var thatKey = that.keys[i];
+        if (thisKey != thatKey) {
+            throw new Error(that + " should have the same key set with " + this);
         }
+        var thisValue = this.find(thisKey);
+        var thatValue = that.find(thisKey);
+        result.put(thisKey, thisValue * thatValue);
     }
     return result;
 };
