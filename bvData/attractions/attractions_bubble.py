@@ -1,5 +1,9 @@
 import json
 import math
+import random
+from googleplaces import GooglePlaces, types, lang
+API_KEY = 'AIzaSyDSsVHtIZHGL-LeJCbGhkOmKr5IwTb7ybE'
+google_places = GooglePlaces(API_KEY)
 
 # Input: attraction_overall.json file
 # Input format:
@@ -16,7 +20,16 @@ import math
 with open('../imports/attractions_raw.json') as _input_file:
     raw_data = json.load(_input_file)
 
+with open('cities.json') as _cities_file:
+    city_data = json.load(_cities_file)
+
+with open('../imports/geocode.json') as _geocode_file:
+    geo_data = json.load(_geocode_file)
+
+
 cities = map(lambda i: i["name"], raw_data)
+countries = map(lambda i: i["country"], city_data)
+geocodes = map(lambda i: i["data"], geo_data)
 raw_data = map(lambda i: i["data"], raw_data)
 
 # Gather all categories
@@ -35,9 +48,9 @@ for _city in raw_data:
 # Input
 #   list: ordered list of tuples, tuple[0] = key, tuple[1] = number
 # Output
-#   ordered preserved list of tuples, but each tuple's number normalized according to 20 - 150 indices
+#   Each tuple has a dictionary of "value" normalized according to 20 - 150 indices
+#   and geocode of the most prominent location of that category 
 def even_distribution(_list):
-
     origMax = max(_list, key=lambda item: item[1])[1]
     origMin = min(_list, key=lambda item: item[1])[1]
     newMax = 150
@@ -54,14 +67,70 @@ def even_distribution(_list):
     normalized = [( name, (float(value - origMin) / float(origSpan)) ) for (name, value) in reduced ]
 
     # Convert the 0-1 range into a value in the right range.
-    scaled = [ (name, int(newMin + value * newSpan)) for (name, value) in normalized ]
+    scaled = [ (name, {"value": int(newMin + value * newSpan), "geocode": { "lat": 0, "lng": 0 } }) for (name, value) in normalized ]
     
     return scaled
 
+# Input
+#   list: ordered list of tuples, tuple[0] = key tuple[1] = dictionary of value of number 
+#   and geocode dictionary of latitude and longitude coordinates
+# Output
+#   Updated geocode with latitude and longitude of the most prominent place for each category using Google PlaceServices
+def get_prominent_geocode(_list, idx):
+    _category_types = { "Food & Drink": [types.TYPE_FOOD],
+                        "Spas & Wellness": [types.TYPE_SPA],
+                        "Shopping": [types.TYPE_SHOPPING_MALL],
+                        "Outdoor Activities": [],
+                        "Amusement Parks": [types.TYPE_AMUSEMENT_PARK],
+                        "Boat Tours & Water Sports": [],
+                        "Sights & Landmarks": [],
+                        "Nature & Parks": [],
+                        "Zoos & Aquariums": [types.TYPE_ZOO, types.TYPE_AQUARIUM],
+                        "Theater & Concerts": [types.TYPE_MOVIE_THEATER],
+                        "Tours & Activities": [],
+                        "Nightlife": [types.TYPE_NIGHT_CLUB, types.TYPE_BAR],
+                        "Fun & Games": [],
+                        "Traveler Resources": [types.TYPE_TRAVEL_AGENCY],
+                        "Transportation": [],
+                        "Classes & Workshops": [],
+                        "Museums": [types.TYPE_MUSEUM],
+                        "Casinos & Gambling": [types.TYPE_CASINO]
+                    }
+    geocode = geocodes[idx]
+    minLat = min(geocode[0], geocode[2])
+    maxLat = max(geocode[0], geocode[2])
+    minLng = min(geocode[1], geocode[3])
+    maxLng = max(geocode[1], geocode[3])
+
+    for _category, _info in _list:
+        geocode = _info["geocode"]
+        lat = geocode["lat"]
+        lng = geocode["lng"]
+        loc = cities[idx]+", "+countries[idx]
+
+        if len(_category_types[_category]) > 0:
+            query_result = google_places.nearby_search(location=loc, keyword=_category,
+            radius=20000, types=_category_types[_category])  
+        else:
+            #search with just keywords
+            query_result = google_places.nearby_search(location=loc, keyword=_category,
+            radius=20000)
+
+        if len(query_result.places) > 0 :
+            coords = query_result.places[0].geo_location
+            lat = float(coords["lat"])
+            lng = float(coords["lng"])
+        #else fail, provide random coordinates inside the boundary box of the city
+        else:    
+            lat = float("{0:.8f}".format(random.random() * (maxLat - minLat) + minLat))
+            lng = float("{0:.8f}".format(random.random() * (maxLng - minLng) + minLng))
+            
 
 scaled_data = [];
-for _city in raw_data:
-    scaled_data.append(dict(even_distribution(_city.items())))
+for _index, _city in enumerate(raw_data):
+    scaled = even_distribution(_city.items())
+    updated_city_items = get_prominent_geocode(scaled, _index)
+    scaled_data.append(dict(updated_city_items))
 
 for _index, _data in enumerate(scaled_data):
     scaled_data[_index] = {
