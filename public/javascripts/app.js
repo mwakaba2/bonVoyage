@@ -48,6 +48,10 @@ app.config(['$routeProvider', function ($routeProvider) {
             templateUrl: 'templates/travelGuide-edit-form.html',
             controller: 'EditTravelGuideCtrl'
         })
+        .when('/recommend', {
+            templateUrl: 'templates/recommend.html',
+            controller: 'RecommendCtrl'
+        })
         .otherwise({
             public: true,
             redirectTo: '/'
