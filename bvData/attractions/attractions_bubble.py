@@ -3,7 +3,7 @@ import math
 import random
 import time
 from googleplaces import GooglePlaces, types, lang
-API_KEY = 'AIzaSyAF_pJjojJ5kELi7q_W_Kgd6xhfJ7EQ1i0'
+API_KEY = 'AIzaSyB10jZp-mBKyj0XGKt70UBXTdQTpOqzcPs'
 google_places = GooglePlaces(API_KEY)
 
 # Input: attraction_overall.json file

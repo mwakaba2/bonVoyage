@@ -44,38 +44,17 @@ app.controller('CityCtrl', function ($scope, $routeParams, Api, DataVis, leaflet
                 [geocode[0], geocode[1]],
                 [geocode[2], geocode[3]]
             ]);
-            
-            var minLat = Math.min(geocode[0], geocode[2]);
-            var maxLat = Math.max(geocode[0], geocode[2]);
-            var minLng = Math.min(geocode[1], geocode[3]);
-            var maxLng = Math.max(geocode[1], geocode[3]);
 
             $scope.bounds = bounds;
             $scope.maxBounds = bounds;
             var things_to_do = $scope.city.attractions_bubble;
-            var random_coordinates = [];
-            var num_indices = Object.keys(things_to_do).length;
-
-            // Generate random coordinates to display a bubble for each index
-            for(var i = 0; i < num_indices; i++){
-                random_coordinates.push({
-                    lat: parseFloat((Math.random() * (maxLat - minLat) + minLat).toFixed(8)),
-                    lng: parseFloat((Math.random() * (maxLng - minLng) + minLng).toFixed(8)),
-                });
-            } 
-
             $scope.paths = {};
-            function getPage(base_url) {
-                DataVis.getLink(base_url);   
-            }
 
             for (var category in things_to_do) {
-                var coords = random_coordinates.pop();
-                var value = parseInt(things_to_do[category]);
+                var coords = things_to_do[category].geocode
+                var value = parseInt(things_to_do[category].value);
                 var marker = category.split(' ')[0];
                 var link = $scope.city.attractions_link;
-                $scope.getPage = getPage;
-
                 var randColor = DataVis.getRandHexColor();
                 $scope.paths[marker] = {
                     type: 'circleMarker',
@@ -87,10 +66,8 @@ app.controller('CityCtrl', function ($scope, $routeParams, Api, DataVis, leaflet
                     weight: 2,
                     radius: value,
                     fillOpacity: 0.4,
-                    message: '<h5 class="text-center"><b>'+category+'</b></h5><h6>'+value+' Things to do</h6><a ng-click="getPage('+link+')">Check it out!</a>'
+                    message: '<h5 class="text-center"><b>'+category+'</b></h5><h6>'+value+' Things to do</h6><a target = "_blank" href="'+link+'">Check it out!</a>'
                 }
-
-
             }
 
             // If user is authenticated, do something with bookmarked and viewed cities
