@@ -1,8 +1,9 @@
 import json
 import math
 import random
+import time
 from googleplaces import GooglePlaces, types, lang
-API_KEY = 'AIzaSyDSsVHtIZHGL-LeJCbGhkOmKr5IwTb7ybE'
+API_KEY = 'AIzaSyAF_pJjojJ5kELi7q_W_Kgd6xhfJ7EQ1i0'
 google_places = GooglePlaces(API_KEY)
 
 # Input: attraction_overall.json file
@@ -109,22 +110,36 @@ def get_prominent_geocode(_list, idx):
         loc = cities[idx]+", "+countries[idx]
 
         if len(_category_types[_category]) > 0:
-            query_result = google_places.nearby_search(location=loc, keyword=_category,
-            radius=20000, types=_category_types[_category])  
+            print("Finding coordinates for {0} in {1}".format(_category, loc))
+            time.sleep(2)
+            try:
+                query_result = google_places.nearby_search(location=loc, keyword=_category,
+                radius=20000, types=_category_types[_category])  
+            except ValueError:
+                continue
+            except urllib2.HTTPError:
+                continue
         else:
             #search with just keywords
-            query_result = google_places.nearby_search(location=loc, keyword=_category,
-            radius=20000)
+            print("Finding coordinates for {0} in {1}".format(_category, loc))
+            time.sleep(2)
+            try:
+                query_result = google_places.nearby_search(location=loc, keyword=_category,
+                radius=20000)
+            except ValueError:
+                continue
+            except urllib2.HTTPError:
+                continue
 
-        if len(query_result.places) > 0 :
+        if query_result and len(query_result.places) > 0:
             coords = query_result.places[0].geo_location
-            lat = float(coords["lat"])
-            lng = float(coords["lng"])
+            geocode["lat"] = float(coords["lat"])
+            geocode["lng"] = float(coords["lng"])
         #else fail, provide random coordinates inside the boundary box of the city
         else:    
-            lat = float("{0:.8f}".format(random.random() * (maxLat - minLat) + minLat))
-            lng = float("{0:.8f}".format(random.random() * (maxLng - minLng) + minLng))
-            
+            geocode["lat"] = float("{0:.8f}".format(random.random() * (maxLat - minLat) + minLat))
+            geocode["lng"] = float("{0:.8f}".format(random.random() * (maxLng - minLng) + minLng))
+    return _list
 
 scaled_data = [];
 for _index, _city in enumerate(raw_data):

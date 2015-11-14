@@ -65,12 +65,17 @@ app.controller('CityCtrl', function ($scope, $routeParams, Api, DataVis, leaflet
             } 
 
             $scope.paths = {};
+            function getPage(base_url) {
+                DataVis.getLink(base_url);   
+            }
 
             for (var category in things_to_do) {
                 var coords = random_coordinates.pop();
                 var value = parseInt(things_to_do[category]);
                 var marker = category.split(' ')[0];
                 var link = $scope.city.attractions_link;
+                $scope.getPage = getPage;
+
                 var randColor = DataVis.getRandHexColor();
                 $scope.paths[marker] = {
                     type: 'circleMarker',
@@ -81,8 +86,11 @@ app.controller('CityCtrl', function ($scope, $routeParams, Api, DataVis, leaflet
                     color: randColor,
                     weight: 2,
                     radius: value,
-                    message: '<h5 class="text-center"><b>'+category+'</b></h5><h6>'+value+' Things to do</h6><a target="_blank" href="'+link+'">Check it out!</a>'
+                    fillOpacity: 0.4,
+                    message: '<h5 class="text-center"><b>'+category+'</b></h5><h6>'+value+' Things to do</h6><a ng-click="getPage('+link+')">Check it out!</a>'
                 }
+
+
             }
 
             if (user.current.authenticated) {
