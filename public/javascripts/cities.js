@@ -9,7 +9,7 @@ app.controller('CitiesCtrl', function ($scope, Api) {
     );
 });
 
-app.controller('CityCtrl', function ($scope, $routeParams, Api, DataVis, leafletData, leafletBoundsHelpers, user, UserApp) {
+app.controller('CityCtrl', function ($scope, $routeParams, Api, DataVis, leafletData, leafletBoundsHelpers, user, UserApiCache) {
     angular.extend($scope, {
         center : {},
         layers: {
@@ -93,58 +93,38 @@ app.controller('CityCtrl', function ($scope, $routeParams, Api, DataVis, leaflet
 
             }
 
+            // If user is authenticated, do something with bookmarked and viewed cities
             if (user.current.authenticated) {
-                user.getCurrent().then(function (currentUser) {
-                    // Decide whether the current city is bookmarked
-                    var bookmarked_cities = JSON.parse(currentUser.properties.bookmarked_cities.value);
-                    $scope.bookmarked = bookmarked_cities.indexOf($scope.city.name) !== -1;
 
-                    // Set up click listener for bookmark button
-                    $scope.toggleBookmark = function () {
-                        user.getCurrent().then(function (currentUser) {
-                            var bookmarked_cities = JSON.parse(currentUser.properties.bookmarked_cities.value);
-                            if ($scope.bookmarked) {
-                                var index = bookmarked_cities.indexOf($scope.city.name);
-                                if (index > -1) {
-                                    bookmarked_cities.splice(index, 1);
-                                }
-                            } else {
-                                bookmarked_cities.push($scope.city.name);
-                            }
-                            $scope.bookmarked = !$scope.bookmarked;
-                            UserApp.User.save({
-                                "user_id": "self",
-                                "properties": {
-                                    "bookmarked_cities": JSON.stringify(bookmarked_cities),
-                                    "override": true
-                                }
-                            }, function () {
-                                // TODO: error handling
-                            });
-                        }, function () {
-                            // TODO: error handling
-                        });
-                    };
-
-                    // Add current city to viewed cities
-                    var viewed_cities = JSON.parse(currentUser.properties.viewed_cities.value);
-                    viewed_cities.push($scope.city.name);
-                    console.log(viewed_cities);
-                    if (viewed_cities.length >= 11) {
-                        viewed_cities.pop();
-                    }
-                    UserApp.User.save({
-                        "user_id": "self",
-                        "properties": {
-                            "viewed_cities": JSON.stringify(viewed_cities),
-                            "override": true
-                        }
-                    }, function () {
+                // Add to viewed cities
+                UserApiCache.addToViewed($scope.city.name).then(
+                    function () {},
+                    function (err) {
                         // TODO: error handling
-                    });
-                }, function (err) {
-                    // TODO: error handling
-                })
+                    }
+                );
+
+                // Whether the city is bookmarked?
+                UserApiCache.getBookmarks().then(
+                    function (result) {
+                        $scope.bookmarked = result.indexOf($scope.city.name) !== -1;
+                    },
+                    function (err) {
+                        // TODO: error handling
+                    }
+                );
+
+                // Toggle bookmark
+                $scope.toggleBookmark = function () {
+                    UserApiCache.toggleBookmark($scope.city.name).then(
+                        function () {
+                            $scope.bookmarked = !$scope.bookmarked;
+                        },
+                        function (err) {
+                            // TODO: error handling
+                        }
+                    );
+                }
             }
         },
         function (error) {

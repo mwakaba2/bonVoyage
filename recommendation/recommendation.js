@@ -6,6 +6,9 @@ Array.prototype.avg = function () {
             return 0;
         }
     });
+    if (this.length == 0) {
+        return 0;
+    }
     var sum = this.reduce(function(a, b) {
         return a + b;
     });
