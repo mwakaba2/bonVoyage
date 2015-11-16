@@ -33,8 +33,14 @@ app.controller('CityCtrl', function ($scope, $routeParams, Api, DataVis, leaflet
         },
         defaults: {
             scrollWheelZoom: false
+        },
+        events: {
+            map: {},
+            paths : {}
         }
     });
+
+    var paths = {}; 
 
     Api.getCityById($routeParams.id).then(
         function (data) {
@@ -46,9 +52,8 @@ app.controller('CityCtrl', function ($scope, $routeParams, Api, DataVis, leaflet
             ]);
 
             $scope.bounds = bounds;
-            $scope.maxBounds = bounds;
             var things_to_do = $scope.city.attractions_bubble;
-            $scope.paths = {};
+            
 
             for (var category in things_to_do) {
                 var coords = things_to_do[category].geocode
@@ -56,7 +61,7 @@ app.controller('CityCtrl', function ($scope, $routeParams, Api, DataVis, leaflet
                 var marker = category.split(' ')[0];
                 var link = $scope.city.attractions_link;
                 var randColor = DataVis.getRandHexColor();
-                $scope.paths[marker] = {
+                paths[marker] = {
                     type: 'circleMarker',
                     latlngs: {
                         lat: coords.lat,
@@ -66,7 +71,10 @@ app.controller('CityCtrl', function ($scope, $routeParams, Api, DataVis, leaflet
                     weight: 2,
                     radius: value,
                     fillOpacity: 0.4,
-                    message: '<h5 class="text-center"><b>'+category+'</b></h5><h6>'+value+' Things to do</h6><a target = "_blank" href="'+link+'">Check it out!</a>'
+                    message: '<a target = "_blank" href="'+link+'">Check it out!</a>',
+                    label: {
+                            message: '<h5 class="text-center"><b>'+category+'</b></h5><h6>'+value+' Things to do</h6>'
+                    }
                 }
             }
 
@@ -119,7 +127,7 @@ app.controller('CityCtrl', function ($scope, $routeParams, Api, DataVis, leaflet
     );
 
     angular.extend($scope, {
-        paths: {}
+        paths: paths
     });
 
 });
