@@ -1,4 +1,4 @@
-app.factory("Api", function ($http, $q, $window) {
+app.factory("Api", function ($http, $q, UserApiCache) {
     return {
         getCities: function () {
             var deferred = $q.defer();
@@ -137,6 +137,34 @@ app.factory("Api", function ($http, $q, $window) {
                     deferred.reject(res.statusMessage);
                 }
             );
+
+            return deferred.promise;
+        },
+        getRecommendations: function () {
+            var deferred = $q.defer();
+
+            $q.all([UserApiCache.getBookmarks(), UserApiCache.getViewed()])
+                .then(
+                    function (results) {
+                        var bookmarked = results[0];
+                        var viewed = results[1];
+                        return $http.post('/api/recommend', {
+                            bookmarked: bookmarked,
+                            viewed: viewed
+                        });
+                    },
+                    function (res) {
+                        deferred.reject(res.statusMessage);
+                    }
+                )
+                .then(
+                    function (res) {
+                        deferred.resolve(res.data);
+                    },
+                    function (res) {
+                        deferred.reject(res.statusMessage);
+                    }
+                );
 
             return deferred.promise;
         }

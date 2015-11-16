@@ -65,6 +65,20 @@ app.factory('UserApiCache', function ($q, user, UserApp) {
 
             return deferred.promise;
         },
+        getViewed: function () {
+            var deferred = $q.defer();
+
+            this.init().then(
+                function () {
+                    deferred.resolve(viewed_cities);
+                },
+                function (err) {
+                    deferred.reject(err);
+                }
+            );
+
+            return deferred.promise;
+        },
         addToViewed: function (city) {
             var deferred = $q.defer();
 
