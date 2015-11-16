@@ -29,14 +29,17 @@ app.controller('CityCtrl', function ($scope, $routeParams, Api, DataVis, leaflet
                     layerType: 'HYBRID',
                     type: 'google'
                 }
+            },
+            overlays: {
+                shapes: {
+                    name: 'City Bubbles',
+                    type: 'group',
+                    visible: false
+                }
             }
         },
         defaults: {
             scrollWheelZoom: false
-        },
-        events: {
-            map: {},
-            paths : {}
         }
     });
 
@@ -71,6 +74,7 @@ app.controller('CityCtrl', function ($scope, $routeParams, Api, DataVis, leaflet
                     weight: 2,
                     radius: value,
                     fillOpacity: 0.4,
+                    layer: "shapes",
                     message: '<a target = "_blank" href="'+link+'">Check it out!</a>',
                     label: {
                             message: '<h5 class="text-center"><b>'+category+'</b></h5><h6>'+value+' Things to do</h6>'
