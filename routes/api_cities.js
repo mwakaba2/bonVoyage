@@ -52,9 +52,7 @@ router.get('/name/:name', function (req, res) {
     }, function (err, result) {
         if (err) throw err;
 
-        res.json({
-            _id: result._id
-        })
+        res.json(result);
     });
 });
 

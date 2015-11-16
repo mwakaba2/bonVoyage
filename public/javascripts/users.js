@@ -24,28 +24,19 @@ app.controller('UserCtrl', function ($scope, $routeParams, $location, user, Api,
 
             UserApiCache.getBookmarks().then(
                 function (bookmarked_cities) {
-                    $scope.bookmarked_cities = bookmarked_cities;
-                    $scope.bookmarked_cities = $scope.bookmarked_cities.map(function (city_name) {
-                        return {
-                            name: city_name,
-                            _id: ""
-                        }
-                    });
-                    angular.forEach($scope.bookmarked_cities, function (city, index) {
-                        Api.getCityIdByName(city.name).then(
-                            function (data) {
-                                $scope.bookmarked_cities[index]._id = data;
-                            },
-                            function () {
-                                // TODO: error handling
-                            }
-                        )
-                    })
+                    return Api.getCitiesByNames(bookmarked_cities);
                 },
                 function (err) {
                     // TODO: error handling
                 }
-            );
+            ).then(
+                function (results) {
+                    $scope.bookmarked_cities = results;
+                },
+                function (err) {
+                    // TODO: error handling
+                }
+            )
         },
         function (err) {
             // TODO: error handling here

@@ -28,15 +28,34 @@ app.factory("Api", function ($http, $q, UserApiCache) {
 
             return deferred.promise;
         },
-        getCityIdByName: function (name) {
+        getCityByName: function (name) {
             var deferred = $q.defer();
 
             $http.get('/api/cities/name/' + name).then(
                 function (res) {
-                    deferred.resolve(res.data._id);
+                    deferred.resolve(res.data);
                 },
                 function (res) {
                     deferred.reject(res.statusMessage);
+                }
+            );
+
+            return deferred.promise;
+        },
+        getCitiesByNames: function (names) {
+            var deferred = $q.defer();
+
+            var context = this;
+            var promises = names.map(function (name) {
+                return context.getCityByName(name);
+            });
+
+            $q.all(promises).then(
+                function (results) {
+                    deferred.resolve(results)
+                },
+                function (err) {
+                    deferred.reject(err)
                 }
             );
 
@@ -143,11 +162,12 @@ app.factory("Api", function ($http, $q, UserApiCache) {
         getRecommendations: function () {
             var deferred = $q.defer();
 
+            var context = this;
             $q.all([UserApiCache.getBookmarks(), UserApiCache.getViewed()])
                 .then(
-                    function (results) {
-                        var bookmarked = results[0];
-                        var viewed = results[1];
+                    function (res) {
+                        var bookmarked = res[0];
+                        var viewed = res[1];
                         return $http.post('/api/recommend', {
                             bookmarked: bookmarked,
                             viewed: viewed
@@ -159,10 +179,19 @@ app.factory("Api", function ($http, $q, UserApiCache) {
                 )
                 .then(
                     function (res) {
-                        deferred.resolve(res.data);
+                        var cities = res.data.slice(0, 10);
+                        return context.getCitiesByNames(cities);
                     },
                     function (res) {
                         deferred.reject(res.statusMessage);
+                    }
+                )
+                .then(
+                    function (res) {
+                        deferred.resolve(res);
+                    },
+                    function (res) {
+                        deferred.reject(res.statusMessage)
                     }
                 );
 
