@@ -43,8 +43,8 @@ app.controller('CityCtrl', function ($scope, $routeParams, Api, DataVis, leaflet
         }
     });
 
-    var paths = {}; 
-
+    var paths = {};
+    var link = '';
     Api.getCityById($routeParams.id).then(
         function (data) {
             $scope.city = data;
@@ -56,13 +56,12 @@ app.controller('CityCtrl', function ($scope, $routeParams, Api, DataVis, leaflet
 
             $scope.bounds = bounds;
             var things_to_do = $scope.city.attractions_bubble;
+            link = $scope.city.attractions_link;
             
-
             for (var category in things_to_do) {
                 var coords = things_to_do[category].geocode
                 var value = parseInt(things_to_do[category].value);
                 var marker = category.split(' ')[0];
-                var link = $scope.city.attractions_link;
                 var randColor = DataVis.getRandHexColor();
                 paths[marker] = {
                     type: 'circleMarker',
@@ -75,9 +74,8 @@ app.controller('CityCtrl', function ($scope, $routeParams, Api, DataVis, leaflet
                     radius: value,
                     fillOpacity: 0.4,
                     layer: "shapes",
-                    message: '<a target = "_blank" href="'+link+'">Check it out!</a>',
                     label: {
-                            message: '<h5 class="text-center"><b>'+category+'</b></h5><h6>'+value+' Things to do</h6>'
+                            message: '<h5 class="text-center"><b>'+category+'</b></h5><h6 class="text-center">'+value+' Things to do</h6>'
                     }
                 }
             }
@@ -134,6 +132,20 @@ app.controller('CityCtrl', function ($scope, $routeParams, Api, DataVis, leaflet
         paths: paths
     });
 
+    $scope.$on('leafletDirectivePath.map.click', function(e, path) {
+        // Args will contain the marker name and other relevant information
+        document.getElementById('info').innerHTML = path.leafletObject.options.label.message;
+        document.getElementById('info').innerHTML += "<button class='btn btn-info center-block' target = '_blank' href="+link+">Check it out!</button>";
+    });
+
+}).directive('categoryInfo', function(){
+    return {
+        link: function(scope, element, attrs) {
+            element.on('click', function(){
+                console.log("hello!");
+            }); 
+        } 
+    };
 });
 
 //app.controller('AddCityCtrl', ['$scope', '$resource', '$location',
