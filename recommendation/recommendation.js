@@ -15,9 +15,9 @@ Array.prototype.avg = function () {
     return sum / this.length;
 };
 
-function recommend(cities, bookmarked_cities, viewed_cities) {
-    // Build city vectors
-    var city_vectors = cities.map(function (city) {
+exports.recommend = function(cities, bookmarked_cities, viewed_cities) {
+    // Build city profiles
+    var city_profiles = cities.map(function (city) {
         return {
             name: city.name,
             vector: new SetVector(city.attractions)
@@ -35,30 +35,30 @@ function recommend(cities, bookmarked_cities, viewed_cities) {
     });
 
     // Collect from bookmarked cities and compute weighted average
-    var bookmarked_attractions = collect(cities, bookmarked_cities, types);
-    Object.keys(bookmarked_attractions).forEach(function (key) {
-        bookmarked_attractions[key] = bookmarked_attractions[key].avg();
+    var attractions_for_bookmarked_cities = collect(cities, bookmarked_cities, types);
+    Object.keys(attractions_for_bookmarked_cities).forEach(function (key) {
+        attractions_for_bookmarked_cities[key] = attractions_for_bookmarked_cities[key].avg();
     });
 
     // Collect from viewed cities and compute weighted average
-    var viewed_attractions = collect(cities, viewed_cities, types);
-    Object.keys(viewed_attractions).forEach(function (key) {
-        viewed_attractions[key] = viewed_attractions[key].avg();
+    var attractions_for_viewed_cities = collect(cities, viewed_cities, types);
+    Object.keys(attractions_for_viewed_cities).forEach(function (key) {
+        attractions_for_viewed_cities[key] = attractions_for_viewed_cities[key].avg();
     });
 
-    bookmarked_attractions = new SetVector(bookmarked_attractions);
-    viewed_attractions = new SetVector(viewed_attractions);
+    attractions_for_bookmarked_cities = new SetVector(attractions_for_bookmarked_cities);
+    attractions_for_viewed_cities = new SetVector(attractions_for_viewed_cities);
 
-    // Build user vector
-    var user_vector = bookmarked_attractions.scalar(viewed_attractions, function (a, b) {
+    // Build user profile
+    var user_profile = attractions_for_bookmarked_cities.scalar(attractions_for_viewed_cities, function (a, b) {
         return 0.8 * a + 0.2 * b;
     });
 
     // Compute angle between user vector and each city vector
-    var angles = city_vectors.map(function (city) {
+    var angles = city_profiles.map(function (city_profile) {
         return {
-            name: city.name,
-            distance: city.vector.angleInRadian(user_vector)
+            name: city_profile.name,
+            distance: city_profile.vector.angleInRadian(user_profile)
         }
     });
 
@@ -70,7 +70,7 @@ function recommend(cities, bookmarked_cities, viewed_cities) {
     return angles.map(function (angle) {
         return angle.name;
     })
-}
+};
 
 Array.prototype.contains = function (item) {
     return this.indexOf(item) !== -1;
@@ -96,4 +96,41 @@ function collect(cities, city_names, types) {
     return result;
 }
 
-module.exports = recommend;
+exports.recommend_similar_cities = function(cities, city) {
+    // Build city profiles
+    var city_profiles = cities.map(function (city) {
+        return {
+            name: city.name,
+            vector: new SetVector(city.attractions)
+        }
+    });
+
+    // Find target city vector
+    var target_city_vector = undefined;
+    city_profiles.forEach(function (city_profile) {
+        if (city_profile.name === city) {
+            target_city_vector = city_profile.vector;
+        }
+    });
+
+    if (target_city_vector === undefined) {
+        return [];
+    }
+
+    // Compute angle between target city vector and each city vector
+    var angles = city_profiles.map(function (city_profile) {
+        return {
+            name: city_profile.name,
+            distance: city_profile.vector.angleInRadian(target_city_vector)
+        }
+    });
+
+    // Sort by angles
+    angles.sort(function (a, b) {
+        return a.distance - b.distance;
+    });
+
+    return angles.map(function (angle) {
+        return angle.name;
+    })
+};

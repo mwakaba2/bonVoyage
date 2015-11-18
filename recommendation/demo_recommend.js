@@ -1,4 +1,4 @@
-var recommend = require('./recommendation');
+var recommend = require('./recommendation').recommend;
 
 var bookmarked_cities = ['Paris', 'Berlin'];
 var viewed_cities = [];
