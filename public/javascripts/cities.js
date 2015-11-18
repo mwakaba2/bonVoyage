@@ -31,10 +31,15 @@ app.controller('CityCtrl', function ($scope, $routeParams, Api, DataVis, leaflet
                 }
             },
             overlays: {
-                shapes: {
+                bubbles: {
                     name: 'City Bubbles',
                     type: 'group',
                     visible: true
+                },
+                polygons: {
+                    name: 'Neighborhoods',
+                    type: 'group',
+                    visible: false
                 }
             }
         },
@@ -43,7 +48,8 @@ app.controller('CityCtrl', function ($scope, $routeParams, Api, DataVis, leaflet
         }
     });
 
-    var paths = {};
+    var citybubbles = {};
+    var neighbors = {};
     var link = '';
     Api.getCityById($routeParams.id).then(
         function (data) {
@@ -56,6 +62,7 @@ app.controller('CityCtrl', function ($scope, $routeParams, Api, DataVis, leaflet
 
             $scope.bounds = bounds;
             var things_to_do = $scope.city.attractions_bubble;
+            var neighborhood = $scope.city.neighborhood;
             link = $scope.city.attractions_link;
             
             for (var category in things_to_do) {
@@ -63,7 +70,7 @@ app.controller('CityCtrl', function ($scope, $routeParams, Api, DataVis, leaflet
                 var value = parseInt(things_to_do[category].value);
                 var marker = category.split(' ')[0];
                 var randColor = DataVis.getRandHexColor();
-                paths[marker] = {
+                citybubbles[marker] = {
                     type: 'circleMarker',
                     latlngs: {
                         lat: coords.lat,
@@ -73,13 +80,30 @@ app.controller('CityCtrl', function ($scope, $routeParams, Api, DataVis, leaflet
                     weight: 2,
                     radius: value,
                     fillOpacity: 0.4,
-                    layer: "shapes",
+                    layer: "bubbles",
                     label: {
                             message: '<h5 class="text-center"><b>'+category+'</b></h5><h6 class="text-center">'+value+' Things to do</h6>'
                     }
                 }
             }
 
+            for (var neighbor in neighborhood) {
+                var coords = neighborhood[neighbor].geocode
+                var value = parseInt(neighborhood[neighbor].value);
+                var marker = neighbor;
+                var randColor = DataVis.getRandHexColor();
+                neighbors[marker] = {
+                    type: "polygon",
+                    latlngs: coords,
+                    color: randColor,
+                    weight: 2,
+                    fillOpacity: 0.4,
+                    layer: "polygons",
+                    label: {
+                            message: '<h5 class="text-center"><b>'+neighbor+'</b></h5><h6 class="text-center">'+value+' Things to do</h6>'
+                    }   
+                }
+            }
             // If user is authenticated, do something with bookmarked and viewed cities
             if (user.current.authenticated) {
 
@@ -139,7 +163,9 @@ app.controller('CityCtrl', function ($scope, $routeParams, Api, DataVis, leaflet
     );
 
     angular.extend($scope, {
-        paths: paths
+        citybubbles: citybubbles,
+        neighbors: neighbors
+
     });
 
     $scope.$on('leafletDirectivePath.map.click', function(e, path) {
