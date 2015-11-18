@@ -2,21 +2,6 @@ from bs4 import BeautifulSoup
 import urllib2
 import json
 
-# Input: attraction_links.json file
-# Input format:
-# ["http://...", ...]
-
-# Output: corresponding attractions_overall.json file
-# Output format:
-# [
-#   {
-#       "Sights & Landmarks": 161,
-#       "Museums": 77,
-#       ...
-#   },
-#   ...
-# ]
-
 with open('../attractions/attraction_links.json') as _input_file:
     data = json.load(_input_file)
 
@@ -24,10 +9,30 @@ with open('cities.json') as _cities_file:
     city_data = json.load(_cities_file)
 
 raw_data = map(lambda i: i["data"], data)
-cities = map(lambda i: i["name"], data)
+cities = map(lambda i: i["name"], city_data)
+countries = map(lambda i: i["country"], city_data)
+
+def get_geocode(neighborhood, city, country):
+    print "Getting geocode for " + neighborhood + ", " + city + ", " + _country
+
+    _geocode = []
+    try:
+        # sleep to avoid OVER QUERY LIMIT
+        time.sleep(1)
+        g = geocoder.google(neighborhood + ", " + city + ", " + country)
+        bbox = g.bbox
+        _geocode = bbox['northeast'] + bbox['southwest']
+        print(_geocode)
+    except AttributeError:
+        print "Latlng not found for " + _name + ", " + _country
+    except IndexError:
+        print "Latlng not found for " + _name + ", " + _country
+    except KeyError:
+        print "Latlng not found for " + _name + ", " + _country
+    return _geocode
 
 # Overall attractions
-def neighbors_overall(_url):
+def neighbors_overall(_url, city, country):
     print "Getting overall neighborhoods for " + _url
     # Download
     _html = urllib2.urlopen(_url).read()
@@ -43,13 +48,14 @@ def neighbors_overall(_url):
                 print(__neighbor)
                 __name = __neighbor.find("span", {"class": "filter_name"}).text
                 __count = int(__neighbor.find("span", {"class": "filter_count"}).text[1:-1])
-                __neighbors[__name] = __count
+                __neighbors[__name]["value"] = __count
+                __neighbors[__name]["geocode"] = get_geocode(__name, city, country)
     return __neighbors
 
 
 neighbors_data = [];
 for _index, _link in enumerate(raw_data):
-    neighbors = neighbors_overall(_link)
+    neighbors = neighbors_overall(_link, cities[_index], countries[_index])
     neighbors_data.append(neighbors)
     print neighbors
 
