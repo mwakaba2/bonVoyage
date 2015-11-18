@@ -129,8 +129,12 @@ exports.recommend_similar_cities = function(cities, city) {
     angles.sort(function (a, b) {
         return a.distance - b.distance;
     });
-
-    return angles.map(function (angle) {
-        return angle.name;
-    })
+    
+    return angles
+        .filter(function (angle) {
+            return angle.name !== city;
+        })
+        .map(function (angle) {
+            return angle.name;
+        });
 };
