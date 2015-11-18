@@ -61,3 +61,13 @@ app.config(['$routeProvider', function ($routeProvider) {
 app.run(function($rootScope, user) {
     user.init({ appId: '561c1ea4dac46' });
 });
+
+app.constant('categories', [
+        {'name': 'Gastronomy', 'value': 'gastronomy'},
+        {'name': 'Entertainment', 'value': 'entertainment'},
+        {'name': 'Nature', 'value': 'entertainment'},
+        {'name': 'Weather', 'value': 'weather'},
+        {'name': 'Shopping', 'value': 'shopping'},
+        {'name': 'Etiquette', 'value': 'etiquette'},
+        {'name': 'Sight-Seeing', 'value': 'sight-seeing'}
+    ])

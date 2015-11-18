@@ -1,4 +1,7 @@
 <div class="container">
+	<label ng-repeat="category in categories" class="checkbox-inline">
+		<input type="checkbox" id="{{category.value}}" value="{{category.value}}"> {{category.name}}
+	</label>
 	<ul class="list-group col-md-8 col-md-offset-2">
 	    <a href="#/travelGuide/{{travelGuide._id}}" ng-repeat="travelGuide in travelGuides" class="list-group-item">
 	    	<h3>

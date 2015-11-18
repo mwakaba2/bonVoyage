@@ -55,17 +55,9 @@ app.controller('TravelGuideCtrl', function ($scope, $routeParams, $location, use
     }
 });
 
-app.controller('AddTravelGuideCtrl', function ($scope, $routeParams, $location, user, Api) {
+app.controller('AddTravelGuideCtrl', function ($scope, $routeParams, $location, user, Api, categories) {
     // Category choices
-    $scope.categories = [
-        {'name': 'Gastronomy', 'value': 'gastronomy'},
-        {'name': 'Entertainment', 'value': 'entertainment'},
-        {'name': 'Nature', 'value': 'entertainment'},
-        {'name': 'Weather', 'value': 'weather'},
-        {'name': 'Shopping', 'value': 'shopping'},
-        {'name': 'Etiquette', 'value': 'etiquette'},
-        {'name': 'Sight-Seeing', 'value': 'sight-seeing'}
-    ];
+    $scope.categories = categories;
 
     Api.getCityById($routeParams.city_id).then(
         function (data) {
@@ -146,11 +138,11 @@ app.controller('EditTravelGuideCtrl', function ($scope, $location, $routeParams,
     );
 });
 
-app.controller('TravelGuidesCtrl', function ($scope, $parse, Api) {
+app.controller('TravelGuidesCtrl', function ($scope, $parse, Api, categories) {
     Api.getTravelGuides().then(
         function (data) {
             $scope.travelGuides = data;
-
+            
             angular.forEach($scope.travelGuides, function (travelGuide, index) {
                 Api.getCityById(travelGuide.city_id).then(
                     function (data) {
@@ -166,4 +158,6 @@ app.controller('TravelGuidesCtrl', function ($scope, $parse, Api) {
             // TODO: error handling
         }
     );
+
+    $scope.categories = categories;
 });
