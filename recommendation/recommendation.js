@@ -56,13 +56,9 @@ function recommend(cities, bookmarked_cities, viewed_cities) {
 
     // Compute angle between user vector and each city vector
     var angles = city_vectors.map(function (city) {
-        var city_vector = city.vector;
-        var dot_product = city_vector.dotProduct(user_vector);
-        var city_vector_length = city_vector.length();
-        var user_vector_length = user_vector.length();
         return {
             name: city.name,
-            distance: Math.acos(dot_product / (city_vector_length * user_vector_length))
+            distance: city.vector.angleInRadian(user_vector)
         }
     });
 

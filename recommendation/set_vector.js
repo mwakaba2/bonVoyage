@@ -31,6 +31,22 @@ SetVector.prototype.find = function (key) {
     }
 };
 
+SetVector.prototype.checkIdentity = function (that) {
+    if (this.keys.length !== that.keys.length) {
+        return false;
+    }
+
+    var this_keys_sorted = this.keys.clone().sort();
+    var that_keys_sorted = that.keys.clone().sort();
+    for (var i = 0 ; i < this_keys_sorted.length ; ++i) {
+        if (this_keys_sorted[i] !== that_keys_sorted[i]) {
+            return false;
+        }
+    }
+
+    return true;
+};
+
 SetVector.prototype.scalarProduct = function (that) {
     return this.scalar(that, function (a, b) {
         return a * b;
@@ -42,16 +58,8 @@ Array.prototype.clone = function() {
 };
 
 SetVector.prototype.scalar = function (that, op) {
-    if (this.keys.length !== that.keys.length) {
+    if (!this.checkIdentity(that)) {
         throw new Error(that + " should have the same key set with " + this);
-    }
-
-    var this_keys_sorted = this.keys.clone().sort();
-    var that_keys_sorted = that.keys.clone().sort();
-    for (var i = 0 ; i < this_keys_sorted.length ; ++i) {
-        if (this_keys_sorted[i] !== that_keys_sorted[i]) {
-            throw new Error(that + " should have the same key set with " + this);
-        }
     }
 
     var result = new SetVector();
@@ -77,6 +85,14 @@ SetVector.prototype.length = function () {
         squared_sum += value * value;
     });
     return Math.sqrt(squared_sum);
+};
+
+SetVector.prototype.angleInRadian = function (that) {
+    if (!this.checkIdentity(that)) {
+        throw new Error(that + " should have the same key set with " + this);
+    }
+
+    return Math.acos(this.dotProduct(that) / (this.length() * that.length()));
 };
 
 module.exports = SetVector;
