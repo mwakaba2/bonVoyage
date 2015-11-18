@@ -113,6 +113,16 @@ app.controller('CityCtrl', function ($scope, $routeParams, Api, DataVis, leaflet
                     );
                 }
             }
+
+            // Show similar cities
+            Api.getSimilarCities($scope.city.name).then(
+                function (result) {
+                    $scope.similar_cities = result;
+                },
+                function (err) {
+                    // TODO
+                }
+            );
         },
         function (error) {
             // TODO: error handling

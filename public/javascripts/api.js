@@ -170,7 +170,8 @@ app.factory("Api", function ($http, $q, UserApiCache) {
                         var viewed = res[1];
                         return $http.post('/api/recommend', {
                             bookmarked: bookmarked,
-                            viewed: viewed
+                            viewed: viewed,
+                            limit: 10
                         });
                     },
                     function (res) {
@@ -179,11 +180,37 @@ app.factory("Api", function ($http, $q, UserApiCache) {
                 )
                 .then(
                     function (res) {
-                        var cities = res.data.slice(0, 10);
-                        return context.getCitiesByNames(cities);
+                        return context.getCitiesByNames(res.data);
                     },
                     function (res) {
                         deferred.reject(res.statusMessage);
+                    }
+                )
+                .then(
+                    function (res) {
+                        deferred.resolve(res);
+                    },
+                    function (res) {
+                        deferred.reject(res.statusMessage)
+                    }
+                );
+
+            return deferred.promise;
+        },
+        getSimilarCities: function (city) {
+            var deferred = $q.defer();
+
+            var context = this;
+            $http.post('/api/recommend/city', {
+                    city: city,
+                    limit: 5
+                })
+                .then(
+                    function (res) {
+                        return context.getCitiesByNames(res.data);
+                    },
+                    function (res) {
+                        deferred.reject(res.statusMessage)
                     }
                 )
                 .then(
