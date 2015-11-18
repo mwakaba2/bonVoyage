@@ -4,3 +4,4 @@ python geocode_import_local.py
 python attractions_import_local.py
 python attractions_bubble_import_local.py
 python attraction_links_import_local.py
+python neighbor_import_local.py

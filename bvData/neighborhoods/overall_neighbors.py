@@ -1,6 +1,8 @@
 from bs4 import BeautifulSoup
 import urllib2
 import json
+import geocoder
+import time
 
 with open('../attractions/attraction_links.json') as _input_file:
     data = json.load(_input_file)
@@ -13,7 +15,7 @@ cities = map(lambda i: i["name"], city_data)
 countries = map(lambda i: i["country"], city_data)
 
 def get_geocode(neighborhood, city, country):
-    print "Getting geocode for " + neighborhood + ", " + city + ", " + _country
+    print "Getting geocode for " + neighborhood + ", " + city + ", " + country
 
     _geocode = []
     try:
@@ -24,11 +26,11 @@ def get_geocode(neighborhood, city, country):
         _geocode = bbox['northeast'] + bbox['southwest']
         print(_geocode)
     except AttributeError:
-        print "Latlng not found for " + _name + ", " + _country
+        print "Latlng not found for " + city + ", " + country
     except IndexError:
-        print "Latlng not found for " + _name + ", " + _country
+        print "Latlng not found for " + city + ", " + country
     except KeyError:
-        print "Latlng not found for " + _name + ", " + _country
+        print "Latlng not found for " + city + ", " + country
     return _geocode
 
 # Overall attractions
@@ -48,8 +50,10 @@ def neighbors_overall(_url, city, country):
                 print(__neighbor)
                 __name = __neighbor.find("span", {"class": "filter_name"}).text
                 __count = int(__neighbor.find("span", {"class": "filter_count"}).text[1:-1])
-                __neighbors[__name]["value"] = __count
-                __neighbors[__name]["geocode"] = get_geocode(__name, city, country)
+                __neighbors[__name] = {
+                    "value": __count,
+                    "geocode": get_geocode(__name, city, country) 
+                }
     return __neighbors
 
 
