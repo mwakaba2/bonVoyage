@@ -2,6 +2,14 @@ app.controller('TravelGuideCtrl', function ($scope, $routeParams, $location, use
     Api.getTravelGuideById($routeParams.id).then(
         function (data) {
             $scope.travelGuide = data;
+            
+            var created_at = $scope.travelGuide.created_at;
+            created_at = moment(new Date(created_at)).format('MMMM Do YYYY, h:mm:ss a');
+            $scope.travelGuide.created_at = created_at;
+            
+            var updated_at = $scope.travelGuide.updated_at;
+            updated_at = moment(new Date(updated_at)).format('MMMM Do YYYY, h:mm:ss a');
+            $scope.travelGuide.updated_at = updated_at; 
         },
         function (error) {
             // TODO: error handling
