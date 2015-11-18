@@ -36,3 +36,7 @@ fieldset {
 .tabs-container {
 	margin-top: 60px;
 }
+
+#info {
+	padding: 15px;
+}

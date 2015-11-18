@@ -34,7 +34,7 @@ app.controller('CityCtrl', function ($scope, $routeParams, Api, DataVis, leaflet
                 shapes: {
                     name: 'City Bubbles',
                     type: 'group',
-                    visible: false
+                    visible: true
                 }
             }
         },
@@ -145,17 +145,9 @@ app.controller('CityCtrl', function ($scope, $routeParams, Api, DataVis, leaflet
     $scope.$on('leafletDirectivePath.map.click', function(e, path) {
         // Args will contain the marker name and other relevant information
         document.getElementById('info').innerHTML = path.leafletObject.options.label.message;
-        document.getElementById('info').innerHTML += "<button class='btn btn-info center-block' target = '_blank' href="+link+">Check it out!</button>";
+        document.getElementById('info').innerHTML += "<a class='btn btn-info btn-md' target = '_blank' href="+link+">Check it out!</a></div>";
     });
 
-}).directive('categoryInfo', function(){
-    return {
-        link: function(scope, element, attrs) {
-            element.on('click', function(){
-                console.log("hello!");
-            }); 
-        } 
-    };
 });
 
 //app.controller('AddCityCtrl', ['$scope', '$resource', '$location',
