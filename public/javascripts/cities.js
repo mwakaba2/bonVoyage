@@ -108,19 +108,22 @@ app.controller('CityCtrl', function ($scope, $routeParams, Api, DataVis, leaflet
                     lng: coords[1]
                 };
                 var value = parseInt(neighborhood[neighbor].value);
-                var marker = neighbor;
+                var marker = neighbor.replace(/[-0-9]/g, '');
                 var randColor = DataVis.getRandHexColor();
                 if(coords.length > 0){
                     shapes[marker] = {
-                        type: "polygon",
-                        latlngs: [ northwest, northeast, southeast, southwest],
+                        type: "multiPolyline",
+                        latlngs: [
+                            [ northwest, northeast ],
+                            [ northwest, southwest ],
+                            [ northeast, southeast ],
+                            [ southeast, southwest]
+                        ],
                         color: randColor,
-                        weight: 2,
-                        fillOpacity: 0.4,
+                        weight: 20,
+                        opacity: 0.7,
                         layer: "rectangles",
-                        label: {
-                                message: '<h5 class="text-center"><b>'+neighbor+'</b></h5><h6 class="text-center">'+value+' Things to do</h6>'
-                        }   
+                        message: '<h5 class="text-center"><b>'+neighbor+'</b></h5><h6 class="text-center">'+value+' Things to do</h6>'
                     }
                 }
                     
@@ -189,7 +192,8 @@ app.controller('CityCtrl', function ($scope, $routeParams, Api, DataVis, leaflet
 
     $scope.$on('leafletDirectivePath.map.click', function(e, path) {
         // Args will contain the marker name and other relevant information
-        document.getElementById('info').innerHTML = path.leafletObject.options.label.message;
+        console.log(path);
+        document.getElementById('info').innerHTML = path.leafletObject._popupContent;
         document.getElementById('info').innerHTML += "<a class='btn btn-info btn-md' target = '_blank' href="+link+">Check it out!</a></div>";
     });
 
