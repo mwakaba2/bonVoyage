@@ -193,7 +193,11 @@ app.controller('CityCtrl', function ($scope, $routeParams, Api, DataVis, leaflet
     $scope.$on('leafletDirectivePath.map.click', function(e, path) {
         // Args will contain the marker name and other relevant information
         console.log(path);
-        document.getElementById('info').innerHTML = path.leafletObject._popupContent;
+        if(path.leafletObject.options){
+            document.getElementById('info').innerHTML = path.leafletObject.options.label.message;
+        }else {
+            document.getElementById('info').innerHTML = path.leafletObject._popupContent;
+        }
         document.getElementById('info').innerHTML += "<a class='btn btn-info btn-md' target = '_blank' href="+link+">Check it out!</a></div>";
     });
 
