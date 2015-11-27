@@ -65,9 +65,9 @@ app.run(function($rootScope, user) {
 app.constant('categories', [
         {'name': 'Gastronomy', 'value': 'gastronomy'},
         {'name': 'Entertainment', 'value': 'entertainment'},
-        {'name': 'Nature', 'value': 'entertainment'},
+        {'name': 'Nature', 'value': 'nature'},
         {'name': 'Weather', 'value': 'weather'},
         {'name': 'Shopping', 'value': 'shopping'},
         {'name': 'Etiquette', 'value': 'etiquette'},
         {'name': 'Sight-Seeing', 'value': 'sight-seeing'}
-    ])
+    ]);
