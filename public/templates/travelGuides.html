@@ -1,15 +1,25 @@
 <div class="container">
-	<label ng-repeat="category in categories" class="checkbox-inline">
-		<input type="checkbox" id="{{category.value}}" value="{{category.value}}"> {{category.name}}
-	</label>
-	<ul class="list-group col-md-8 col-md-offset-2">
-	    <a href="#/travelGuide/{{travelGuide._id}}" ng-repeat="travelGuide in travelGuides" class="list-group-item">
-	    	<h3>
-	    			{{travelGuide.title}} </br>
-	    			<small>{{travelGuide.city.name}}, {{travelGuide.city.country}}</small>
-	    	</h3>
-	    	<h5>Category: {{travelGuide.category}}</h5>
-	    	<p>{{travelGuide.content | limitTo: 250 }}...</p>
-	    </a>
-	</ul>
+    <form>
+        <div class="form-group">
+            <label ng-repeat="category in categories" class="checkbox-inline">
+                <input type="checkbox" id="{{category.value}}" value="{{category.value}}" checked
+                       ng-click="categoryClicked(category.value)"> {{category.name}}
+            </label>
+        </div>
+        <div class="form-group">
+            <input class="form-control" type="text" ng-model="active_name"/>
+        </div>
+    </form>
+    <ul class="list-group col-md-8 col-md-offset-2">
+        <a href="#/travelGuide/{{travelGuide._id}}"
+           ng-repeat="travelGuide in travelGuides | activeTravelGuides:active_categories:active_name" class="list-group-item">
+            <h3>
+                {{travelGuide.title}} </br>
+                <small>{{travelGuide.city.name}}, {{travelGuide.city.country}}</small>
+            </h3>
+            <h5>Category: {{travelGuide.category}}</h5>
+
+            <p>{{travelGuide.content | limitTo: 250 }}...</p>
+        </a>
+    </ul>
 </div>

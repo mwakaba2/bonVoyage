@@ -2,14 +2,14 @@ app.controller('TravelGuideCtrl', function ($scope, $routeParams, $location, use
     Api.getTravelGuideById($routeParams.id).then(
         function (data) {
             $scope.travelGuide = data;
-            
+
             var created_at = $scope.travelGuide.created_at;
             created_at = moment(new Date(created_at)).format('MMMM Do YYYY, h:mm:ss a');
             $scope.travelGuide.created_at = created_at;
-            
+
             var updated_at = $scope.travelGuide.updated_at;
             updated_at = moment(new Date(updated_at)).format('MMMM Do YYYY, h:mm:ss a');
-            $scope.travelGuide.updated_at = updated_at; 
+            $scope.travelGuide.updated_at = updated_at;
         },
         function (error) {
             // TODO: error handling
@@ -138,11 +138,35 @@ app.controller('EditTravelGuideCtrl', function ($scope, $location, $routeParams,
     );
 });
 
+Array.prototype.contains = function (item) {
+    return this.indexOf(item) !== -1;
+};
+
+Array.prototype.removeFirst = function (item) {
+    var index = this.indexOf(item);
+    if (index > -1) {
+        this.splice(index, 1);
+    }
+};
+
+String.prototype.contains = function (needle) {
+    return needle === '' || this.indexOf(needle) !== -1;
+};
+
+app.filter('activeTravelGuides', function () {
+    return function (items, active_categories, active_name) {
+        return items.filter(function (item) {
+            return active_categories.contains(item.category)
+                && item.city.name.toUpperCase().contains(active_name.toUpperCase());
+        })
+    }
+});
+
 app.controller('TravelGuidesCtrl', function ($scope, $parse, Api, categories) {
     Api.getTravelGuides().then(
         function (data) {
             $scope.travelGuides = data;
-            
+
             angular.forEach($scope.travelGuides, function (travelGuide, index) {
                 Api.getCityById(travelGuide.city_id).then(
                     function (data) {
@@ -160,4 +184,16 @@ app.controller('TravelGuidesCtrl', function ($scope, $parse, Api, categories) {
     );
 
     $scope.categories = categories;
+    $scope.active_categories = categories.map(function (category) {
+        return category.value;
+    });
+    $scope.categoryClicked = function (value) {
+        if ($scope.active_categories.contains(value)) {
+            $scope.active_categories.removeFirst(value);
+        } else {
+            $scope.active_categories.push(value);
+        }
+    };
+
+    $scope.active_name = "";
 });
