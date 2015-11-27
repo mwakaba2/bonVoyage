@@ -192,7 +192,6 @@ app.controller('CityCtrl', function ($scope, $routeParams, Api, DataVis, leaflet
 
     $scope.$on('leafletDirectivePath.map.click', function(e, path) {
         // Args will contain the marker name and other relevant information
-        console.log(path);
         if(path.leafletObject.options){
             document.getElementById('info').innerHTML = path.leafletObject.options.label.message;
         }else {
