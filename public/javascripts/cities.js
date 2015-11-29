@@ -43,7 +43,7 @@ app.controller('CityCtrl', function ($scope, $routeParams, Api, DataVis, leaflet
         }
     });
 
-    var shapes = {};
+    var paths = {};
     var link = '';
     Api.getCityById($routeParams.id).then(
         function (data) {
@@ -64,7 +64,7 @@ app.controller('CityCtrl', function ($scope, $routeParams, Api, DataVis, leaflet
                 var value = parseInt(things_to_do[category].value);
                 var marker = category.split(' ')[0];
                 var randColor = DataVis.getRandHexColor();
-                shapes[marker] = {
+                paths[marker] = {
                     type: 'circleMarker',
                     latlngs: {
                         lat: coords.lat,
@@ -82,7 +82,7 @@ app.controller('CityCtrl', function ($scope, $routeParams, Api, DataVis, leaflet
             }
 
             if ( Object.keys(neighborhood).length > 0) {
-                $scope.layers.overlays["rectangles"] = {
+                $scope.layers.overlays["neighbors"] = {
                     name: 'Neighborhoods',
                     type: 'group',
                     visible: false
@@ -111,7 +111,7 @@ app.controller('CityCtrl', function ($scope, $routeParams, Api, DataVis, leaflet
                 var marker = neighbor.replace(/[-0-9]/g, '');
                 var randColor = DataVis.getRandHexColor();
                 if(coords.length > 0){
-                    shapes[marker] = {
+                    paths[marker] = {
                         type: "multiPolyline",
                         latlngs: [
                             [ northwest, northeast ],
@@ -122,7 +122,7 @@ app.controller('CityCtrl', function ($scope, $routeParams, Api, DataVis, leaflet
                         color: randColor,
                         weight: 20,
                         opacity: 0.7,
-                        layer: "rectangles",
+                        layer: "neighbors",
                         message: '<h5 class="text-center"><b>'+neighbor+'</b></h5><h6 class="text-center">'+value+' Things to do</h6>'
                     }
                 }
@@ -187,7 +187,7 @@ app.controller('CityCtrl', function ($scope, $routeParams, Api, DataVis, leaflet
     );
 
     angular.extend($scope, {
-        shapes: shapes
+        paths: paths
     });
 
     $scope.$on('leafletDirectivePath.map.click', function(e, path) {

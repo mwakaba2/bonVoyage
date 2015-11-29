@@ -138,22 +138,22 @@ app.controller('EditTravelGuideCtrl', function ($scope, $location, $routeParams,
     );
 });
 
-Array.prototype.contains = function (item) {
-    return this.indexOf(item) !== -1;
-};
-
-Array.prototype.removeFirst = function (item) {
-    var index = this.indexOf(item);
-    if (index > -1) {
-        this.splice(index, 1);
-    }
-};
-
-String.prototype.contains = function (needle) {
-    return needle === '' || this.indexOf(needle) !== -1;
-};
 
 app.filter('activeTravelGuides', function () {
+    Array.prototype.contains = function (item) {
+        return this.indexOf(item) !== -1;
+    };
+
+    Array.prototype.removeFirst = function (item) {
+        var index = this.indexOf(item);
+        if (index > -1) {
+            this.splice(index, 1);
+        }
+    };
+
+    String.prototype.contains = function (needle) {
+        return needle === '' || this.indexOf(needle) !== -1;
+    };
     return function (items, active_categories, active_name) {
         return items.filter(function (item) {
             return active_categories.contains(item.category)
@@ -163,6 +163,21 @@ app.filter('activeTravelGuides', function () {
 });
 
 app.controller('TravelGuidesCtrl', function ($scope, $parse, Api, categories) {
+    Array.prototype.contains = function (item) {
+        return this.indexOf(item) !== -1;
+    };
+
+    Array.prototype.removeFirst = function (item) {
+        var index = this.indexOf(item);
+        if (index > -1) {
+            this.splice(index, 1);
+        }
+    };
+
+    String.prototype.contains = function (needle) {
+        return needle === '' || this.indexOf(needle) !== -1;
+    };
+    
     Api.getTravelGuides().then(
         function (data) {
             $scope.travelGuides = data;
