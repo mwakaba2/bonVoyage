@@ -4,8 +4,8 @@
     <meta charset="UTF-8">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
-    <link rel="stylesheet" href="stylesheets/style.css">
     <link rel="stylesheet" href="stylesheets/leaflet.label.css">
+    <link rel="stylesheet" href="stylesheets/style.css">
     <!-- Leaflet CSS File -->
     <link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet/v0.7.7/leaflet.css" />
     <script src="http://maps.google.com/maps/api/js?key=AIzaSyAFeJNoaii7hlPKvCmcs1Fs0QV1gFgTbmE"></script>
@@ -45,9 +45,9 @@
         </div>
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <ul class="nav navbar-nav">
-                <li><a href="#/cities">Cities</a></li>
-                <li><a href="#/travelGuides">Travel Guides</a></li>
-                <li><a ng-show="user.authenticated" href="#/recommend">Recommend for you</a></li>
+                <li><a active-link="active" href="#/cities">Cities</a></li>
+                <li><a active-link="active" href="#/travelGuides">Travel Guides</a></li>
+                <li><a active-link="active" ng-show="user.authenticated" href="#/recommend">Recommend for you</a></li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
                 <li ng-show="!user.authenticated"><a href="#/signup">Sign up</a></li>

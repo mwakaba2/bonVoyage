@@ -7,9 +7,28 @@ app.controller('CitiesCtrl', function ($scope, Api) {
             // TODO: error handling
         }
     );
-});
+    
+}).directive('activeLink', ['$location', function (location) {
+    return {
+        restrict: 'A',
+        link: function(scope, element, attrs, controller) {
+        var clazz = attrs.activeLink;
+        var path = attrs.href;
+        path = path.substring(1);
+        scope.location = location;
+        scope.$watch('location.path()', function (newPath) {
+            console.log(newPath, path);
+            if (path === newPath) {
+                element.addClass(clazz);
+            } else {
+                element.removeClass(clazz);
+            }
+        });
+        }
+    };
+}]);
 
-app.controller('CityCtrl', function ($scope, $routeParams, Api, DataVis, leafletData, leafletBoundsHelpers, user, UserApiCache, $compile) {
+app.controller('CityCtrl', function ($scope, $routeParams, Api, DataVis, leafletData, leafletBoundsHelpers, user, UserApiCache) {
     angular.extend($scope, {
         center : {},
         layers: {
