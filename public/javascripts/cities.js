@@ -9,7 +9,7 @@ app.controller('CitiesCtrl', function ($scope, Api) {
     );
 });
 
-app.controller('CityCtrl', function ($scope, $routeParams, Api, DataVis, leafletData, leafletBoundsHelpers, user, UserApiCache) {
+app.controller('CityCtrl', function ($scope, $routeParams, Api, DataVis, leafletData, leafletBoundsHelpers, user, UserApiCache, $compile) {
     angular.extend($scope, {
         center : {},
         layers: {
@@ -45,6 +45,7 @@ app.controller('CityCtrl', function ($scope, $routeParams, Api, DataVis, leaflet
 
     var shapes = {};
     var link = '';
+
     Api.getCityById($routeParams.id).then(
         function (data) {
             $scope.city = data;
@@ -190,17 +191,18 @@ app.controller('CityCtrl', function ($scope, $routeParams, Api, DataVis, leaflet
         shapes: shapes
     });
 
+
     $scope.$on('leafletDirectivePath.map.click', function(e, path) {
         // Args will contain the marker name and other relevant information
-        console.log(path);
         if(path.leafletObject.options){
             document.getElementById('info').innerHTML = path.leafletObject.options.label.message;
-        }else {
+        } else {
             document.getElementById('info').innerHTML = path.leafletObject._popupContent;
         }
-        document.getElementById('info').innerHTML += "<a class='btn btn-info btn-md' target = '_blank' href="+link+">Check it out!</a></div>";
-    });
 
+        buttonHTML = "<a class='btn btn-info btn-md' href="+link+" target='_blank'>Check it out!</a></div>";
+        $('#info').append(buttonHTML);
+    });
 });
 
 //app.controller('AddCityCtrl', ['$scope', '$resource', '$location',
