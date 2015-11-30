@@ -44,14 +44,17 @@ app.controller('TravelGuideCtrl', function ($scope, $routeParams, $location, use
     );
 
     $scope.delete = function () {
-        Api.deleteTravelGuideById($routeParams.id).then(
-            function (data) {
-                $location.path('/');
-            },
-            function (error) {
-                // TODO: error handling
-            }
-        );
+        var result = confirm("Are you sure you would like to delete "+$scope.travelGuide.title+"?");
+        if (result) {
+            Api.deleteTravelGuideById($routeParams.id).then(
+                function (data) {
+                    $location.path('/');
+                },
+                function (error) {
+                    // TODO: error handling
+                }
+            );
+        }
     }
 });
 
